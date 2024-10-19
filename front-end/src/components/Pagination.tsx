@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button'; // Import Button from shadcn components
 import { cn } from '@/lib/utils'; // Utility function for class merging if needed
+import { PaginationEllipsis } from './ui/pagination';
 
 interface PaginationProps {
   totalItems: number;
@@ -48,7 +49,7 @@ const Pagination: React.FC<PaginationProps> = ({
           {index + 1}
         </Button>
       ))}
-
+      <PaginationEllipsis />
       {/* Next Button */}
       <Button
         className="bg-gray-200"
