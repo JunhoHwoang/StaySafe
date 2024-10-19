@@ -1,9 +1,12 @@
 import React from "react";
 import Header from "./header";
-import { useParams } from "react-router-dom";
-import GetCard from "./hooks/GetCard";
+import { useLocation } from "react-router-dom";
 
 const CardPage = () => {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const id = queryParams.get('id');
+
   return (
     <div className="flex flex-col w-full h-screen items-stretch">
       <Header />
