@@ -84,14 +84,14 @@ export const FilterSort = ({ items, onFilterSort }) => {
     if (sortOrder) {
       filteredItems.sort((a, b) => {
         switch (sortOrder) {
-          case "high":
-            return b.score - a.score; // High to Low
           case "low":
+            return b.score - a.score; // High to Low
+          case "high":
             return a.score - b.score; // Low to High
-          case "oldest":
+          case "newest":
             console.log(a.datetime);
             return new Date(a.datetime) - new Date(b.datetime); // Oldest first
-          case "newest":
+          case "oldest":
             return new Date(b.datetime) - new Date(a.datetime); // Newest first
           case "lex":
             return a.title.localeCompare(b.title); // A-Z by title

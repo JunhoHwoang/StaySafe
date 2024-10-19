@@ -7,6 +7,7 @@ const CardPage = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get("id");
+  const datetime = queryParams.get("datetime");
   const title = queryParams.get("title");
   const description = queryParams.get("description");
   const content = queryParams.get("content");
@@ -19,6 +20,7 @@ const CardPage = () => {
         <div className="flex flex-row justify-center items-center space-x-8">
           <div className="flex flex-col text-center">
             <p className="text-3xl">{title}</p>
+            <p className="text-2xl">{datetime}</p>
             <p className="text-2xl">{id}</p>
           </div>
           <div className="flex flex-col justify-center items-center">
