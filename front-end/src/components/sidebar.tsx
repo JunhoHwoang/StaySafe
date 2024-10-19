@@ -1,14 +1,31 @@
 import { useState } from "react";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Button } from "./ui/button";
 
 export const Sidebar = () => {
   return (
-    <div className="h-full pt-10 w-56 bg-neutral-500 text-white">
-      <section className="flex justify-between">
-        <p className="py-3 text-lg">Filter</p>
-      </section>
-      <div className="sidebar-content">
-        <ul className="cursor-pointer list-none"></ul>
-      </div>
+    <div className="p-4">
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button variant="outline">Filter</Button>
+        </SheetTrigger>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>Are you absolutely sure?</SheetTitle>
+            <SheetDescription>
+              This action cannot be undone. This will permanently delete your
+              account and remove your data from our servers.
+            </SheetDescription>
+          </SheetHeader>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { Button } from "./components/ui/button";
 import Header from "./components/header";
-import React from 'react';
-import { SafetyCardList } from './components/SafetyCardList';
+import React from "react";
+import { SafetyCardList } from "./components/SafetyCardList";
 import "./App.css";
 import { Sidebar } from "./components/sidebar";
 
@@ -27,19 +27,22 @@ const cardData = [
     description: "This is the third card",
     content: "Content for card 3",
     score: 6,
-  }
+  },
 ];
 
 function App() {
   return (
     <div className="flex flex-col w-full h-screen items-stretch">
       <Header />
-      <div className="grid grid-cols-5 grid-rows-1  h-full">
-        <div className=""></div>
-        <Sidebar />
-        <div className=""></div>
-        <SafetyCardList cards={cardData} />
-        <div className=""></div>
+      <div className="grid grid-cols-1 md:grid-cols-5 grid-rows-1 h-full">
+        <div className="md:col-span-2 order-first md:order-last">
+          <p className="text-2xl">Graphs</p>
+        </div>
+        <div className="md:col-span-3 order-last md:order-first">
+          <p className="text-2xl">Results</p>
+          <Sidebar />
+          <SafetyCardList cards={cardData} />
+        </div>
       </div>
     </div>
   );
