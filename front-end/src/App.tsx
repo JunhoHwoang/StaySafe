@@ -1,12 +1,37 @@
-import { Button } from "./components/ui/button";
+import React from 'react';
+import { SafetyCardList } from './components/SafetyCardList';
 import "./App.css";
 
-function App() {
+// Sample data for the cards
+const cardData = [
+  {
+    id: 1,
+    title: "Card 1",
+    description: "This is the first card",
+    content: "Content for card 1",
+    score: 10,
+  },
+  {
+    id: 2,
+    title: "Card 2",
+    description: "This is the second card",
+    content: "Content for card 2",
+    score: 8,
+  },
+  {
+    id: 3,
+    title: "Card 3",
+    description: "This is the third card",
+    content: "Content for card 3",
+    score: 6,
+  }
+];
 
+function App() {
   return (
-    <div className="flex">
-      <p className="text-3xl" >Hi</p>
-      <Button>Click me</Button>
+    <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-4">My Card List</h1>
+      <SafetyCardList cards={cardData} />
     </div>
   );
 }
