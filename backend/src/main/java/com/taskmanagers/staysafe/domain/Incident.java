@@ -7,7 +7,7 @@ import lombok.Data;
 public class Incident {
 
     @CsvBindByName(column = "OBSRVTN_NB")
-    private String id;
+    private int id;
 
     @CsvBindByName(column = "DATETIME_DTM")
     private String date;
