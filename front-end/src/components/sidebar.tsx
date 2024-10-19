@@ -24,7 +24,7 @@ import { ScoreFilter } from "./ScoreFilter";
 
 export const Sidebar = () => {
   return (
-    <div className="flex flex-row items-center space-x-4">
+    <div className="flex flex-row items-center space-x-4 mb-4">
       <Dialog>
         <DialogTrigger asChild>
           <Button variant="outline">Filter</Button>
@@ -33,11 +33,9 @@ export const Sidebar = () => {
           <DialogHeader>
             <DialogTitle>Filter</DialogTitle>
           </DialogHeader>
-          <div className="flex items-center space-x-2">
-            <div className="grid flex-1 gap-2">
-              <DatePicker />
-              <ScoreFilter />
-            </div>
+          <div className="space-y-4 py-4">
+            <DatePicker />
+            <ScoreFilter />
           </div>
           <DialogFooter className="sm:justify-start">
             <DialogClose asChild>

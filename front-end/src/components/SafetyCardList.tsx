@@ -32,15 +32,15 @@ const CardItem: React.FC<CardData> = ({
   content,
   score,
 }) => (
-  <Card className="m-4 transform transition-transform duration-200 hover:scale-105 hover:shadow-lg">
-    <CardHeader>
+  <Card className="mb-4 transform transition-transform duration-200 hover:scale-105 hover:shadow-lg">
+    <CardHeader className="p-4">
       <CardTitle>{title}</CardTitle>
       <CardDescription>{description}</CardDescription>
     </CardHeader>
-    <CardContent>
+    <CardContent className="p-4">
       <p>{content}</p>
     </CardContent>
-    <CardFooter>
+    <CardFooter className="p-4">
       <Badge>Score: {score}</Badge>
     </CardFooter>
   </Card>
@@ -55,7 +55,6 @@ export const SafetyCardList: React.FC<CardListProps> = ({ cards }) => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = cards.slice(indexOfFirstItem, indexOfLastItem);
-  
 
   return (
     <div className="flex flex-col pb-6 w-full">

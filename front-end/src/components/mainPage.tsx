@@ -51,15 +51,15 @@ const cardData = [
 
 export default function MainPage() {
   return (
-    <div className="flex flex-col w-full h-screen items-stretch">
+    <div className="flex flex-col w-full min-h-screen">
       <Header />
-      <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-1 h-full ml-5">
-        <div className="md:col-span-2 order-first md:order-last m-4">
-          <p className="text-2xl">Graphs</p>
+      <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-6 p-6">
+        <div className="md:col-span-2 order-first md:order-last space-y-4">
+          <h2 className="text-2xl font-semibold">Graphs</h2>
           <Graphs />
         </div>
-        <div className="md:col-span-2 order-last md:order-first m-4">
-          <p className="text-2xl">Results</p>
+        <div className="md:col-span-2 order-last md:order-first space-y-4">
+          <h2 className="text-2xl font-semibold">Results</h2>
           <Sidebar />
           <SafetyCardList cards={cardData} />
         </div>
