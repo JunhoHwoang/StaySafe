@@ -1,14 +1,12 @@
-import { useState } from "react";
 import { Button } from "./components/ui/button";
 import "./App.css";
-import React from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
-    <div>
-      <Button variant="outline">Click me</Button>
+    <div className="flex">
+      <p className="text-3xl" >Hi</p>
+      <Button>Click me</Button>
     </div>
   );
 }
