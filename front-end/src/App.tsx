@@ -6,11 +6,11 @@ import "./App.css";
 function App() {
   return (
     <BrowserRouter>
-    <Routes>
-      <Route index element={<MainPage />} />
-      <Route path="/:id?" element={<CardPage />} />
-    </Routes>
-  </BrowserRouter>
+      <Routes>
+        <Route index element={<MainPage />} />
+        <Route path="/card" element={<CardPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

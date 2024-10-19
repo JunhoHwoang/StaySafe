@@ -59,7 +59,11 @@ export const SafetyCardList: React.FC<CardListProps> = ({ cards }) => {
   return (
     <div className="flex flex-col pb-6 w-full">
       {currentItems.map((card) => (
-        <Link key={card.id} to={`/${card.id}`} className="no-underline">
+        <Link
+          key={card.id}
+          to={`/card?id=${card.id}&title=${card.title}&description=${card.description}&content=${card.content}&score=${card.score}`}
+          className="no-underline"
+        >
           <CardItem {...card} />
         </Link>
       ))}
