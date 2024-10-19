@@ -1,13 +1,16 @@
-import { Button } from "./components/ui/button";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import MainPage from "./components/mainPage";
+import CardPage from "./components/cardPage";
 import "./App.css";
 
 function App() {
-
   return (
-    <div className="flex">
-      <p className="text-3xl" >Hi</p>
-      <Button>Click me</Button>
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route index element={<MainPage />} />
+      <Route path="/:id" element={<CardPage />} />
+    </Routes>
+  </BrowserRouter>
   );
 }
 
