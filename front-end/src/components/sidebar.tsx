@@ -8,10 +8,17 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "./ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export const Sidebar = () => {
   return (
-    <div className="p-4">
+    <div className="p-4 flex-row">
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline">Filter</Button>
@@ -26,6 +33,17 @@ export const Sidebar = () => {
           </SheetHeader>
         </SheetContent>
       </Sheet>
+
+      <Select>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Sort" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="light"></SelectItem>
+          <SelectItem value="dark">Dark</SelectItem>
+          <SelectItem value="system">System</SelectItem>
+        </SelectContent>
+      </Select>
     </div>
   );
 };
