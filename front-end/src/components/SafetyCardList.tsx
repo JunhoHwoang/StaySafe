@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './ui/card';
-import { Badge } from "@/components/ui/badge"
-
+import { Badge } from "@/components/ui/badge";
+import { Link } from 'react-router-dom';
 
 // Define the interface for our card data
 interface CardData {
@@ -19,7 +19,7 @@ interface CardListProps {
 
 // Individual Card component
 const CardItem: React.FC<CardData> = ({ title, description, content, score }) => (
-  <Card className="w-[350px] m-4">
+  <Card className="m-4 transform transition-transform duration-200 hover:scale-105 hover:shadow-lg">
     <CardHeader>
       <CardTitle>{title}</CardTitle>
       <CardDescription>{description}</CardDescription>
@@ -36,9 +36,16 @@ const CardItem: React.FC<CardData> = ({ title, description, content, score }) =>
 // CardList component
 export const SafetyCardList: React.FC<CardListProps> = ({ cards }) => {
   return (
-    <div className="flex-col justify-center items-center">
+    <div className="flex flex-col pt-4 w-full">
+      <p className="text-xl">Results:</p>
       {cards.map((card) => (
-        <CardItem key={card.id} {...card} />
+        <Link
+          key={card.id}
+          to={`/${card.id}`}
+          className="no-underline"
+        >
+          <CardItem {...card} />
+        </Link>
       ))}
     </div>
   );
