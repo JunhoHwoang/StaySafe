@@ -6,10 +6,12 @@ import "./App.css";
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route index element={<MainPage />} />
-        <Route path="/card" element={<CardPage />} />
-      </Routes>
+      <div className="bg-background text-foreground">
+        <Routes>
+          <Route index element={<MainPage />} />
+          <Route path="/card" element={<CardPage />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }
