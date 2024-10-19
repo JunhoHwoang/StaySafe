@@ -1,7 +1,34 @@
 import { Button } from "./components/ui/button";
 import Header from "./components/header";
+import React from 'react';
+import { SafetyCardList } from './components/SafetyCardList';
 import "./App.css";
 import { Sidebar } from "./components/sidebar";
+
+// Sample data for the cards
+const cardData = [
+  {
+    id: 1,
+    title: "Card 1",
+    description: "This is the first card",
+    content: "Content for card 1",
+    score: 10,
+  },
+  {
+    id: 2,
+    title: "Card 2",
+    description: "This is the second card",
+    content: "Content for card 2",
+    score: 8,
+  },
+  {
+    id: 3,
+    title: "Card 3",
+    description: "This is the third card",
+    content: "Content for card 3",
+    score: 6,
+  }
+];
 
 function App() {
   return (
@@ -11,6 +38,7 @@ function App() {
         <div className="col-auto"></div>
         <Sidebar />
         <div className=""></div>
+        <SafetyCardList cards={cardData} />
         <div className=""></div>
       </div>
     </div>
