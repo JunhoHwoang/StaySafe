@@ -51,9 +51,9 @@ const cardData = [
 
 export default function MainPage() {
   return (
-    <div className="flex flex-col w-full h-screen items-stretch mx-5">
+    <div className="flex flex-col w-full h-screen items-stretch">
       <Header />
-      <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-1 h-full">
+      <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-1 h-full ml-5">
         <div className="md:col-span-2 order-first md:order-last m-4">
           <p className="text-2xl">Graphs</p>
           <Graphs />
