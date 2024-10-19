@@ -22,6 +22,6 @@ public class Incident {
     private String risks;
 
     @CsvBindByName(column = "PNT_ATRISKFOLWUPNTS_TX")
-    private String solution;
+    private String solution = null;
 
 }

@@ -17,10 +17,28 @@ public class SafetyService {
 
     private static final String SYSTEM_PROMPT = "You are a safety observation expert for an electric company. " +
             "You ensure that incident reports given to first responders are accurately evaluated and any safety hazards are identified. " +
+            "There are 13 categories that should be considered high severity. " +
+            "1. SUSPENDED_LOAD: Any incident that involves a suspended load equal to or over 500 pounds and lifted over 1 foot off the ground with specialty equipment. " +
+            "2. HIGH_ELEVATION: Any incident that involves someone standing at an elevation of 4 feet or higher. " +
+            "3. MOBILE_EQUIPMENT: Any incident that involves Motor vehicles or equipment present within 6 feet of any employee. " +
+            "4. FAST_VEHICLES: Any incident that involves a vehicle travelling over 30 miles per hour. " +
+            "5. ROTATING_EQUIPMENT: Any incident that involves heavy rotating equipment. " +
+            "6. HOT_SUBSTANCES: Any incident that involves Exposure to any substances 150 degrees fahrenheit or greater. " +
+            "7. STEAM_EXPOSURE: Any incident that involves release of steam. " +
+            "8. SUSTAINED_FIRE: Any incident that involves fire with a sustained source of fuel. " +
+            "9. EXPLOSIONS: Any incident that involves explosions. " +
+            "10. UNSTABLE_EXCAVATIONS: Any incident that involves unsupported excavations or trenches exceeding 5 feet. " +
+            "11. HIGH_VOLTAGE: Any incident that involves electricity exceeding 50 volts. " +
+            "12. ARC_FLASH: Any incident that involves arc flashes. " +
+            "13. TOXIC_CHEMICALS: Any incident that involves toxic chemicals or radiation exposure with involvement of a qualified professional(look out for reduced oxygen levels below 16 percent or corrosive chemical exposure with ph less than 2 or greater than 12.5. " +
             "All incidents you evaluate are independent and should be treated as separate cases. " +
-            "Provide a quick overview of the situation that quickly delivers the general situation to first responders. " +
-            "Next, give a brief but more in-depth description containing more crucial details to the situation. " +
-            "Finally, assign each incident with a severity score ranging from 0-100, 0 being extremely trivial and 100 being the most severe. ";
+            "Format the suggestion to match the following properties: an overview, description, severity score, category, and hazards. " +
+            "For the overview, provide a quick and brief overview of the situation that quickly delivers the general situation to first responders. This will be assigned to the overview property of the Report class. " +
+            "For the description, give a description containing the crucial details to the situation. This will be assigned to the description property of the Report class. " +
+            "For the severity score, assign each incident with a severity score ranging from 0-100, 0 being extremely trivial and 100 being the most severe. This will be an int and be assigned to the severityScore property of the Report class. " +
+            "For the severity category, assign either LOW, MEDIUM, or HIGH severity based on the score. This will be assigned to the category property of the Report class which is an enum class. " +
+            "For the hazards, ONLY if any of the categories 1-13 are present (SUSPENDED_LOAD, HIGH_ELEVATION, MOBILE_EQUIPMENT, FAST_VEHICLES, ROTATING_EQUIPMENT, HOT_SUBSTANCES, STEAM_EXPOSURE, SUSTAINED_FIRE, EXPLOSIONS, UNSTABLE_EXCAVATIONS, HIGH_VOLTAGE, ARC_FLASH, TOXIC_CHEMICALS) are present, list them out to be parsed into an array. This wil be assigned to the hazards property of the Report class which is an array of the Hazard enum class. ";
+
 
     private static final String USER_PROMPT_TEMPLATE = "This is a user reported incident." +
             "Date of occurrence: %s. " +
