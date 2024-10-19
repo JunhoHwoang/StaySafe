@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainPage from "./components/mainPage";
+import CardPage from "./components/cardPage";
 import "./App.css";
 
 function App() {
@@ -7,7 +8,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route index element={<MainPage />} />
-      {/* <Route path="/:id" element={< />} /> */}
+      <Route path="/:id" element={<CardPage />} />
     </Routes>
   </BrowserRouter>
   );

@@ -30,7 +30,7 @@ const cardData = [
 
 export default function MainPage() {
   return (
-    <div className="flex flex-col w-full h-screen items-stretch">
+    <div className="flex flex-col w-full h-screen items-stretch mx-5">
       <Header />
       <div className="grid grid-cols-1 md:grid-cols-5 grid-rows-1 h-full">
         <div className="md:col-span-2 order-first md:order-last">

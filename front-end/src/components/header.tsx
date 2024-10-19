@@ -1,8 +1,11 @@
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="w-full p-4 flex items-center justify-center z-10">
+    <div className="w-full p-4 flex items-center justify-center">
+      <Link to="/">
         <p className="text-3xl">StaySafe</p>
+      </Link>
     </div>
   );
 };
