@@ -3,7 +3,6 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -22,7 +21,86 @@ import { DatePicker } from "./DatePicker";
 import { ScoreFilter } from "./ScoreFilter";
 import { CategoryFilter } from "./CategoryFilter";
 
-export const FilterSort = () => {
+export const FilterSort = ({ items, onFilterSort }) => {
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedScore, setSelectedScore] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [sortOrder, setSortOrder] = useState(null);
+
+  // Handle date change from DatePicker
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    applyFilterSort();
+  };
+
+  // Handle score change from ScoreFilter
+  const handleScoreChange = (score) => {
+    setSelectedScore(score);
+    applyFilterSort();
+  };
+
+  // Handle category change from CategoryFilter
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+    applyFilterSort();
+  };
+
+  // Handle sort change
+  const handleSortChange = (value) => {
+    setSortOrder(value);
+    applyFilterSort();
+  };
+
+  // Function to filter and sort items
+  const applyFilterSort = () => {
+    let filteredItems = [...items];
+
+    // Apply filters
+    if (selectedDate) {
+      filteredItems = filteredItems.filter((item) => {
+        // Assuming each item has a date field
+        return new Date(item.date).toDateString() === new Date(selectedDate).toDateString();
+      });
+    }
+
+    if (selectedScore) {
+      filteredItems = filteredItems.filter((item) => {
+        // Assuming each item has a score field and selectedScore is a range (e.g., [min, max])
+        return item.score >= selectedScore[0] && item.score <= selectedScore[1];
+      });
+    }
+
+    if (selectedCategory) {
+      filteredItems = filteredItems.filter((item) => {
+        // Assuming each item has a category field
+        return item.category === selectedCategory;
+      });
+    }
+
+    // Apply sorting
+    if (sortOrder) {
+      filteredItems.sort((a, b) => {
+        switch (sortOrder) {
+          case "high":
+            return b.score - a.score; // High to Low
+          case "low":
+            return a.score - b.score; // Low to High
+          case "oldest":
+            return new Date(a.date) - new Date(b.date); // Oldest first
+          case "newest":
+            return new Date(b.date) - new Date(a.date); // Newest first
+          case "lex":
+            return a.title.localeCompare(b.title); // A-Z by title
+          default:
+            return 0;
+        }
+      });
+    }
+
+    // Call the callback function with the filtered and sorted items
+    onFilterSort(filteredItems);
+  };
+
   return (
     <div className="flex flex-row items-center space-x-4 mb-4">
       <Dialog>
@@ -34,9 +112,9 @@ export const FilterSort = () => {
             <DialogTitle>Filter</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 py-4">
-            <DatePicker />
-            <ScoreFilter />
-            <CategoryFilter />
+            <DatePicker onChange={handleDateChange} />
+            <ScoreFilter onChange={handleScoreChange} />
+            <CategoryFilter onChange={handleCategoryChange} />
           </div>
           <DialogFooter className="sm:justify-start">
             <DialogClose asChild>
@@ -48,13 +126,13 @@ export const FilterSort = () => {
         </DialogContent>
       </Dialog>
 
-      <Select>
+      <Select onValueChange={handleSortChange}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Sort" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="high">Score High to Low</SelectItem>
-          <SelectItem value="low">Score Low to High</SelectItem>
+          <SelectItem value="low">Score High to Low</SelectItem>
+          <SelectItem value="high">Score Low to High</SelectItem>
           <SelectItem value="oldest">Oldest</SelectItem>
           <SelectItem value="newest">Newest</SelectItem>
           <SelectItem value="lex">A-Z</SelectItem>

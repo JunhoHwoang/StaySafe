@@ -2,12 +2,13 @@ import Header from "./header";
 import { SafetyCardList } from "./SafetyCardList";
 import { FilterSort } from "./FilterSort";
 import { Graphs } from "./Graphs";
+import { useState } from "react";
 
 // Sample data for the cards
 const cardData = [
   {
     id: 1,
-    datetime: "2024-01-01",
+    datetime: "4/21/2024",
     title: "Card 1",
     description: "This is the first card",
     content: "Content for card 1",
@@ -15,7 +16,7 @@ const cardData = [
   },
   {
     id: 2,
-    datetime: "2024-02-02",
+    datetime: "4/12/2024",
     title: "Card 2",
     description: "This is the second card",
     content: "Content for card 2",
@@ -23,7 +24,7 @@ const cardData = [
   },
   {
     id: 3,
-    datetime: "2024-03-03",
+    datetime: "9/10/2024",
     title: "Card 3",
     description: "This is the third card",
     content: "Content for card 3",
@@ -31,7 +32,7 @@ const cardData = [
   },
   {
     id: 4,
-    datetime: "2024-04-04",
+    datetime: "2/20/2024",
     title: "Card 4",
     description: "This is the third card",
     content: "Content for card 4",
@@ -39,7 +40,7 @@ const cardData = [
   },
   {
     id: 5,
-    datetime: "2024-04-05",
+    datetime: "4/20/2022",
     title: "Card 5",
     description: "This is the third card",
     content: "Content for card 5",
@@ -47,7 +48,7 @@ const cardData = [
   },
   {
     id: 7,
-    datetime: "2024-04-06",
+    datetime: "4/20/2024",
     title: "Card 6",
     description: "This is the third card",
     content: "Content for card 6",
@@ -56,6 +57,8 @@ const cardData = [
 ];
 
 export default function MainPage() {
+  const [filteredItems, setFilteredItems] = useState(cardData);
+
   return (
     <div className="flex flex-col w-full min-h-screen">
       <Header />
@@ -66,8 +69,8 @@ export default function MainPage() {
         </div>
         <div className="md:col-span-2 order-last md:order-first space-y-4">
           <h2 className="text-2xl font-semibold">Results</h2>
-          <FilterSort />
-          <SafetyCardList cards={cardData} />
+          <FilterSort items={cardData} onFilterSort={setFilteredItems} />
+          <SafetyCardList cards={filteredItems} />
         </div>
       </div>
     </div>

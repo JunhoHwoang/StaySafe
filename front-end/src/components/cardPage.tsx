@@ -23,7 +23,7 @@ const CardPage = () => {
           </div>
           <div className="flex flex-col justify-center items-center">
             <p className="text-2xl">{score}</p>
-            <Progress value={Number(score * 10) || 0} className="w-64" />
+            <Progress value={Number(score) || 0} className="w-64" />
           </div>
         </div>
         <div className="flex flex-col items-start mt-6 text-start">

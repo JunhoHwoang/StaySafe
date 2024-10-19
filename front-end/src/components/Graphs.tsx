@@ -20,16 +20,10 @@ import { Toggle } from "@/components/ui/toggle";
 
 export const description = "An interactive bar chart";
 
-const chartData = [
-  { datetime: "2024-05-01 08:00", value: 372 },
-  { datetime: "2024-05-01 09:00", value: 277 },
-  // ... more data points ...
-  { datetime: "2024-07-31 23:00", value: 846 },
-];
 
 const chartConfig = {
   views: {
-    label: "Page Views",
+    label: "Serverity Score",
   },
   value: {
     label: "Total Views",

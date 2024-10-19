@@ -1,87 +1,144 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from "./ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Link } from "react-router-dom";
-import Pagination from "./Pagination";
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Button } from "./ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { DatePicker } from "./DatePicker";
+import { ScoreFilter } from "./ScoreFilter";
+import { CategoryFilter } from "./CategoryFilter";
 
-// Define the interface for our card data
-interface CardData {
-  id: number;
-  datetime: string;
-  title: string;
-  description: string;
-  content: string;
-  score: number;
-}
+export const FilterSort = ({ items, onFilterSort }) => {
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedScore, setSelectedScore] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [sortOrder, setSortOrder] = useState(null);
 
-// Props for the CardList component
-interface CardListProps {
-  cards: CardData[];
-}
+  // Handle date change from DatePicker
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    applyFilterSort();
+  };
 
-// Individual Card component
-const CardItem: React.FC<CardData> = ({
-  title,
-  datetime,
-  description,
-  content,
-  score,
-}) => (
-  <Card className="mb-4 transform transition-transform duration-200 hover:scale-105 hover:shadow-lg">
-    <CardHeader className="p-4">
-      <CardTitle>{title}</CardTitle>
-      <CardDescription>{description}</CardDescription>
-    </CardHeader>
-    <CardContent className="p-4">
-      <p>{content}</p>
-    </CardContent>
-    <CardFooter className="p-4 flex justify-between items-center">
-      <Badge variant="outline" className="mr-2">
-        {new Date(datetime).toLocaleDateString("en-US", {
-          day: "numeric",
-          month: "short",
-          year: "numeric",
-        })}
-      </Badge>
-      <Badge>Score: {score}</Badge>
-    </CardFooter>
-  </Card>
-);
+  // Handle score change from ScoreFilter
+  const handleScoreChange = (score) => {
+    setSelectedScore(score);
+    applyFilterSort();
+  };
 
-// CardList component
-export const SafetyCardList: React.FC<CardListProps> = ({ cards }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 2;
+  // Handle category change from CategoryFilter
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+    applyFilterSort();
+  };
 
-  // Calculate the current items to display
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = cards.slice(indexOfFirstItem, indexOfLastItem);
+  // Handle sort change
+  const handleSortChange = (value) => {
+    setSortOrder(value);
+    applyFilterSort();
+  };
+
+  // Function to filter and sort items
+  const applyFilterSort = () => {
+    let filteredItems = [...items];
+
+    // Apply filters
+    if (selectedDate) {
+      filteredItems = filteredItems.filter((item) => {
+        // Assuming each item has a date field
+        return new Date(item.datetime).toDateString() === new Date(selectedDate).toDateString();
+      });
+    }
+
+    if (selectedScore) {
+      filteredItems = filteredItems.filter((item) => {
+        // Assuming each item has a score field and selectedScore is a range (e.g., [min, max])
+        return item.score >= selectedScore[0] && item.score <= selectedScore[1];
+      });
+    }
+
+    if (selectedCategory) {
+      filteredItems = filteredItems.filter((item) => {
+        // Assuming each item has a category field
+        return item.category === selectedCategory;
+      });
+    }
+
+    // Apply sorting
+    if (sortOrder) {
+      filteredItems.sort((a, b) => {
+        switch (sortOrder) {
+          case "high":
+            return b.score - a.score; // High to Low
+          case "low":
+            return a.score - b.score; // Low to High
+          case "oldest":
+            console.log(a.datetime);
+            return new Date(a.datetime) - new Date(b.datetime); // Oldest first
+          case "newest":
+            return new Date(b.datetime) - new Date(a.datetime); // Newest first
+          case "lex":
+            return a.title.localeCompare(b.title); // A-Z by title
+          default:
+            return 0;
+        }
+      });
+    }
+
+    // Call the callback function with the filtered and sorted items
+    onFilterSort(filteredItems);
+  };
 
   return (
-    <div className="flex flex-col pb-6 w-full">
-      {currentItems.map((card) => (
-        <Link
-          key={card.id}
-          to={`/card?id=${card.id}&title=${card.title}&description=${card.description}&content=${card.content}&score=${card.score}`}
-          className="no-underline"
-        >
-          <CardItem {...card} />
-        </Link>
-      ))}
-      <Pagination
-        totalItems={cards.length}
-        itemsPerPage={itemsPerPage}
-        currentPage={currentPage}
-        onPageChange={setCurrentPage}
-      />
+    <div className="flex flex-row items-center space-x-4 mb-4">
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button variant="outline">Filter</Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Filter</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <DatePicker onChange={handleDateChange} />
+            <ScoreFilter onChange={handleScoreChange} />
+            <CategoryFilter onChange={handleCategoryChange} />
+          </div>
+          <DialogFooter className="sm:justify-start">
+            <DialogClose asChild>
+              <Button type="button" variant="secondary">
+                Close
+              </Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Select onValueChange={handleSortChange}>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Sort" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="high">Score High to Low</SelectItem>
+          <SelectItem value="low">Score Low to High</SelectItem>
+          <SelectItem value="oldest">Oldest</SelectItem>
+          <SelectItem value="newest">Newest</SelectItem>
+          <SelectItem value="lex">A-Z</SelectItem>
+        </SelectContent>
+      </Select>
     </div>
   );
 };
