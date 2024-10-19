@@ -9,7 +9,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "./ui/button";
 import {
@@ -21,8 +20,9 @@ import {
 } from "@/components/ui/select";
 import { DatePicker } from "./DatePicker";
 import { ScoreFilter } from "./ScoreFilter";
+import { CategoryFilter } from "./CategoryFilter";
 
-export const Sidebar = () => {
+export const FilterSort = () => {
   return (
     <div className="flex flex-row items-center space-x-4 mb-4">
       <Dialog>
@@ -36,6 +36,7 @@ export const Sidebar = () => {
           <div className="space-y-4 py-4">
             <DatePicker />
             <ScoreFilter />
+            <CategoryFilter />
           </div>
           <DialogFooter className="sm:justify-start">
             <DialogClose asChild>
