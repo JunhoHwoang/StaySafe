@@ -32,13 +32,15 @@ public class SafetyService {
             "12. ARC_FLASH: Any incident that involves arc flashes. " +
             "13. TOXIC_CHEMICALS: Any incident that involves toxic chemicals or radiation exposure with involvement of a qualified professional(look out for reduced oxygen levels below 16 percent or corrosive chemical exposure with ph less than 2 or greater than 12.5. " +
             "All incidents you evaluate are independent and should be treated as separate cases. " +
-            "Format the suggestion to match the following properties: an overview, description, severity score, category, and hazards. " +
-            "For the overview, provide a quick and brief overview of the situation that quickly delivers the general situation to first responders. This will be assigned to the overview property of the Report class. " +
-            "For the description, give a description containing the crucial details to the situation. This will be assigned to the description property of the Report class. " +
-            "For the severity score, assign each incident with a severity score ranging from 0-100, 0 being extremely trivial and 100 being the most severe. This will be an int and be assigned to the severityScore property of the Report class. " +
-            "For the severity category, assign either LOW, MEDIUM, or HIGH severity based on the score. This will be assigned to the category property of the Report class which is an enum class. " +
-            "For the hazards, ONLY if any of the categories 1-13 are present (SUSPENDED_LOAD, HIGH_ELEVATION, MOBILE_EQUIPMENT, FAST_VEHICLES, ROTATING_EQUIPMENT, HOT_SUBSTANCES, STEAM_EXPOSURE, SUSTAINED_FIRE, EXPLOSIONS, UNSTABLE_EXCAVATIONS, HIGH_VOLTAGE, ARC_FLASH, TOXIC_CHEMICALS) are present, list them out to be parsed into an array. This wil be assigned to the hazards property of the Report class which is an array of the Hazard enum class. ";
-
+            "Format the suggestion to match the following properties: an overview, description, severity score, category, hazards, prevention, solution, and lesson. " +
+            "For the overview, provide a quick and brief overview of the situation that quickly delivers the general situation to first responders. " +
+            "For the description, give a description containing the crucial details to the situation. " +
+            "For the severity score, assign each incident a severity score ranging from 0-100, 0 being extremely trivial and 100 being the most severe. This will cast to an int. " +
+            "For the severity category, assign only one of the three options LOW, MEDIUM, or HIGH severity based on the score. " +
+            "For the hazards, ONLY if any of the categories 1-13 are present (SUSPENDED_LOAD, HIGH_ELEVATION, MOBILE_EQUIPMENT, FAST_VEHICLES, ROTATING_EQUIPMENT, HOT_SUBSTANCES, STEAM_EXPOSURE, SUSTAINED_FIRE, EXPLOSIONS, UNSTABLE_EXCAVATIONS, HIGH_VOLTAGE, ARC_FLASH, TOXIC_CHEMICALS) are present, list them out. This will be parsed into an array. " +
+            "For solution, give examples of solutions that can be done right now to fix the issue. " +
+            "For prevention, give examples of preventative measures that can be taken in the future that will prevent this issue from occurring again. " +
+            "For lesson, give some examples of lessons that can be learned from this situation that will better prepare people in the future for similar situations. ";
 
     private static final String USER_PROMPT_TEMPLATE = "This is a user reported incident." +
             "Date of occurrence: %s. " +

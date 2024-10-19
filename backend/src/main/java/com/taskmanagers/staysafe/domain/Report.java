@@ -7,10 +7,10 @@ public record Report(
         String description,
         int severityScore,
         SeverityCategory category,
-        List<Hazard> hazards
-        // Solution
-        // Prevention
-        // Lessons
+        List<Hazard> hazards,
+        String solution,
+        String prevention,
+        String lesson
 ) {
     public enum SeverityCategory {
         LOW,
