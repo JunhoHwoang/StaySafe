@@ -37,7 +37,6 @@ const CardItem: React.FC<CardData> = ({ title, description, content, score }) =>
 export const SafetyCardList: React.FC<CardListProps> = ({ cards }) => {
   return (
     <div className="flex flex-col pt-4 w-full">
-      <p className="text-xl">Results:</p>
       {cards.map((card) => (
         <Link
           key={card.id}

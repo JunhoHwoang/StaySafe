@@ -33,10 +33,10 @@ export default function MainPage() {
     <div className="flex flex-col w-full h-screen items-stretch">
       <Header />
       <div className="grid grid-cols-1 md:grid-cols-5 grid-rows-1 h-full">
-        <div className="md:col-span-2 order-first md:order-last">
+        <div className="md:col-span-2 order-first md:order-last m-4">
           <p className="text-2xl">Graphs</p>
         </div>
-        <div className="md:col-span-3 order-last md:order-first">
+        <div className="md:col-span-3 order-last md:order-first m-4">
           <p className="text-2xl">Results</p>
           <Sidebar />
           <SafetyCardList cards={cardData} />
