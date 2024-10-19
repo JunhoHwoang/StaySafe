@@ -14,6 +14,7 @@ import Pagination from "./Pagination";
 // Define the interface for our card data
 interface CardData {
   id: number;
+  datetime: string;
   title: string;
   description: string;
   content: string;
@@ -28,6 +29,7 @@ interface CardListProps {
 // Individual Card component
 const CardItem: React.FC<CardData> = ({
   title,
+  datetime,
   description,
   content,
   score,
@@ -40,7 +42,14 @@ const CardItem: React.FC<CardData> = ({
     <CardContent className="p-4">
       <p>{content}</p>
     </CardContent>
-    <CardFooter className="p-4">
+    <CardFooter className="p-4 flex justify-between items-center">
+      <Badge variant="outline" className="mr-2">
+        {new Date(datetime).toLocaleDateString("en-US", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        })}
+      </Badge>
       <Badge>Score: {score}</Badge>
     </CardFooter>
   </Card>

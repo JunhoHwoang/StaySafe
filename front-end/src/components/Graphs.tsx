@@ -37,11 +37,22 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function Graphs() {
+interface GraphsProps {
+  cardData: {
+    id: number;
+    datetime: string;
+    title: string;
+    description: string;
+    content: string;
+    score: number;
+  }[];
+}
+
+export function Graphs({ cardData }: GraphsProps) {
   const [activeView, setActiveView] = React.useState<"date" | "time">("date");
 
   const processedData = React.useMemo(() => {
-    return chartData.map(({ datetime, value }) => ({
+    return cardData.map(({ datetime, score }) => ({
       label:
         activeView === "date"
           ? new Date(datetime).toLocaleDateString("en-US", {
@@ -54,13 +65,13 @@ export function Graphs() {
               minute: "2-digit",
               hour12: false,
             }),
-      value,
+      value: score,
     }));
-  }, [activeView]);
+  }, [activeView, cardData]);
 
   const total = React.useMemo(
-    () => chartData.reduce((acc, curr) => acc + curr.value, 0),
-    []
+    () => cardData.reduce((acc, curr) => acc + curr.score, 0),
+    [cardData]
   );
 
   return (
@@ -94,7 +105,7 @@ export function Graphs() {
           </div>
           <div className="flex items-center">
             <span className="text-md font-bold leading-none sm:text-3xl">
-              Mean: {(total / chartData.length).toFixed(2)}
+              Mean: {(total / cardData.length).toFixed(2)}
             </span>
           </div>
         </CardHeader>
