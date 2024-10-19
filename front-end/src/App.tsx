@@ -35,7 +35,7 @@ function App() {
     <div className="flex flex-col w-full h-screen items-stretch">
       <Header />
       <div className="grid grid-cols-5 grid-rows-1  h-full">
-        <div className="col-auto"></div>
+        <div className=""></div>
         <Sidebar />
         <div className=""></div>
         <SafetyCardList cards={cardData} />
