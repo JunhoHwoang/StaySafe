@@ -5,7 +5,7 @@ import GetCard from "./hooks/GetCard";
 
 const CardPage = () => {
   return (
-    <div className="flex flex-col w-full h-screen items-stretch mx-5">
+    <div className="flex flex-col w-full h-screen items-stretch">
       <Header />
     </div>
   );
