@@ -2,6 +2,7 @@ import Header from "./header";
 import React from "react";
 import { SafetyCardList } from "./SafetyCardList";
 import { Sidebar } from "./sidebar";
+import { Graphs } from "./Graphs";
 
 // Sample data for the cards
 const cardData = [
@@ -35,6 +36,7 @@ export default function MainPage() {
       <div className="grid grid-cols-1 md:grid-cols-5 grid-rows-1 h-full">
         <div className="md:col-span-2 order-first md:order-last m-4">
           <p className="text-2xl">Graphs</p>
+          <Graphs />
         </div>
         <div className="md:col-span-3 order-last md:order-first m-4">
           <p className="text-2xl">Results</p>

@@ -54,11 +54,11 @@ export const Sidebar = () => {
           <SelectValue placeholder="Sort" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="light">Score High to Low</SelectItem>
-          <SelectItem value="dark">Score Low to High</SelectItem>
-          <SelectItem value="system">Oldest</SelectItem>
-          <SelectItem value="system">Newest</SelectItem>
-          <SelectItem value="system">A-Z</SelectItem>
+          <SelectItem value="high">Score High to Low</SelectItem>
+          <SelectItem value="low">Score Low to High</SelectItem>
+          <SelectItem value="oldest">Oldest</SelectItem>
+          <SelectItem value="newest">Newest</SelectItem>
+          <SelectItem value="lex">A-Z</SelectItem>
         </SelectContent>
       </Select>
     </div>
