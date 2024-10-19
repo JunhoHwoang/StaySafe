@@ -21,7 +21,7 @@ import { DatePicker } from "./DatePicker";
 import { ScoreFilter } from "./ScoreFilter";
 import { CategoryFilter } from "./CategoryFilter";
 
-export const SafetyCardList = ({ items, onFilterSort }) => {
+export const FilterSort = ({ items, onFilterSort }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedScore, setSelectedScore] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -59,7 +59,10 @@ export const SafetyCardList = ({ items, onFilterSort }) => {
     if (selectedDate) {
       filteredItems = filteredItems.filter((item) => {
         // Assuming each item has a date field
-        return new Date(item.datetime).toDateString() === new Date(selectedDate).toDateString();
+        return (
+          new Date(item.datetime).toDateString() ===
+          new Date(selectedDate).toDateString()
+        );
       });
     }
 
