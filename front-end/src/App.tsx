@@ -7,7 +7,7 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div>
+    <div className="bg-red min-h-screen flex items-center justify-center">
       <Button variant="outline">Click me</Button>
     </div>
   );
