@@ -25,7 +25,7 @@ export const FilterSort = ({ items, onFilterSort }) => {
   const [selectedDate, setSelectedDate] = useState(false);
   const [selectedScore, setSelectedScore] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(false);
-  const [sortOrder, setSortOrder] = useState(flase);
+  const [sortOrder, setSortOrder] = useState(false);
 
   // Handle date change from DatePicker
   const handleDateChange = (date) => {
