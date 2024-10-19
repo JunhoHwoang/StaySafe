@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardHeader,
@@ -9,6 +9,7 @@ import {
 } from "./ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
+import Pagination from "./Pagination";
 
 // Define the interface for our card data
 interface CardData {
@@ -47,13 +48,28 @@ const CardItem: React.FC<CardData> = ({
 
 // CardList component
 export const SafetyCardList: React.FC<CardListProps> = ({ cards }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 1;
+
+  // Calculate the current items to display
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = cards.slice(indexOfFirstItem, indexOfLastItem);
+  
+
   return (
-    <div className="flex flex-col pt-4 w-full">
-      {cards.map((card) => (
+    <div className="flex flex-col pb-6 w-full">
+      {currentItems.map((card) => (
         <Link key={card.id} to={`/${card.id}`} className="no-underline">
           <CardItem {...card} />
         </Link>
       ))}
+      <Pagination
+        totalItems={cards.length}
+        itemsPerPage={itemsPerPage}
+        currentPage={currentPage}
+        onPageChange={setCurrentPage}
+      />
     </div>
   );
 };
