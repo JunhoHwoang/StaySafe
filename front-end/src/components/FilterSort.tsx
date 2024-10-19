@@ -21,7 +21,7 @@ import { DatePicker } from "./DatePicker";
 import { ScoreFilter } from "./ScoreFilter";
 import { CategoryFilter } from "./CategoryFilter";
 
-export const FilterSort = ({ items, onFilterSort }) => {
+export const SafetyCardList = ({ items, onFilterSort }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedScore, setSelectedScore] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -59,7 +59,7 @@ export const FilterSort = ({ items, onFilterSort }) => {
     if (selectedDate) {
       filteredItems = filteredItems.filter((item) => {
         // Assuming each item has a date field
-        return new Date(item.date).toDateString() === new Date(selectedDate).toDateString();
+        return new Date(item.datetime).toDateString() === new Date(selectedDate).toDateString();
       });
     }
 
@@ -86,9 +86,10 @@ export const FilterSort = ({ items, onFilterSort }) => {
           case "low":
             return a.score - b.score; // Low to High
           case "oldest":
-            return new Date(a.date) - new Date(b.date); // Oldest first
+            console.log(a.datetime);
+            return new Date(a.datetime) - new Date(b.datetime); // Oldest first
           case "newest":
-            return new Date(b.date) - new Date(a.date); // Newest first
+            return new Date(b.datetime) - new Date(a.datetime); // Newest first
           case "lex":
             return a.title.localeCompare(b.title); // A-Z by title
           default:
@@ -131,8 +132,8 @@ export const FilterSort = ({ items, onFilterSort }) => {
           <SelectValue placeholder="Sort" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="low">Score High to Low</SelectItem>
-          <SelectItem value="high">Score Low to High</SelectItem>
+          <SelectItem value="high">Score High to Low</SelectItem>
+          <SelectItem value="low">Score Low to High</SelectItem>
           <SelectItem value="oldest">Oldest</SelectItem>
           <SelectItem value="newest">Newest</SelectItem>
           <SelectItem value="lex">A-Z</SelectItem>
