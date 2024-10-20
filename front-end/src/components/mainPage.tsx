@@ -8,7 +8,7 @@ import { useState } from "react";
 const cardData = [
   {
     id: 1,
-    datetime: "4/21/2024",
+    datetime: "4/21/2024 6:00",
     title: "Card 1",
     description: "This is the first card",
     content: "Content for card 1",
@@ -16,7 +16,7 @@ const cardData = [
   },
   {
     id: 2,
-    datetime: "4/12/2024",
+    datetime: "4/12/2024 14:00",
     title: "Card 2",
     description: "This is the second card",
     content: "Content for card 2",
@@ -24,7 +24,7 @@ const cardData = [
   },
   {
     id: 3,
-    datetime: "9/10/2024",
+    datetime: "9/10/202 24:00",
     title: "Card 3",
     description: "This is the third card",
     content: "Content for card 3",
@@ -32,7 +32,7 @@ const cardData = [
   },
   {
     id: 4,
-    datetime: "2/20/2024",
+    datetime: "2/20/2024 23:00",
     title: "Card 4",
     description: "This is the third card",
     content: "Content for card 4",
