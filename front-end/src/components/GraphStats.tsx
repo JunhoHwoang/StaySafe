@@ -4,17 +4,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 interface GraphStatsProps {
   cardData: {
     id: number;
-    datetime: string;
-    title: string;
+    data: string;
+    time: string;
+    overview: string;
     description: string;
-    content: string;
-    score: number;
+    solution: string;
+    severityScore: number;
   }[];
 }
 
 export function GraphStats({ cardData }: GraphStatsProps) {
   const stats = useMemo(() => {
-    const scores = cardData?.map((card) => card.score) || [];
+    const scores = cardData?.map((card) => card.severityScore) || [];
     const sum = scores?.reduce((acc, score) => acc + score, 0);
     const mean = scores?.length ? sum / scores?.length : 0;
 
@@ -40,8 +41,8 @@ export function GraphStats({ cardData }: GraphStatsProps) {
       cardData?.map((card, index) => {
         const last7Days = cardData?.slice(Math.max(0, index - 6), index + 1);
         const avg =
-          last7Days?.reduce((sum, c) => sum + c.score, 0) / last7Days?.length;
-        return { date: new Date(card.datetime), average: avg };
+          last7Days?.reduce((sum, c) => sum + c.severityScore, 0) / last7Days?.length;
+        return { date: new Date(card.date), average: avg };
       }) || [];
 
     return {

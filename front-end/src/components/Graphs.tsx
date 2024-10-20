@@ -36,19 +36,23 @@ export function Graphs({ cardData }: GraphsProps) {
 
   const processedData = React.useMemo(() => {
     return cardData?.map(({ date, time, severityScore }) => {
-      const dateObj = new Date(date + time);
+      const dateObj = new Date(date);
+      const timeObj = new Date(time);
+      console.log(dateObj);
+      console.log(timeObj);
+
       return {
         x:
           activeView === "date"
-            ? dateObj.getTime()
-            : dateObj.getHours() + dateObj.getMinutes() / 60, // Time as fraction of 24 hours
+            ? timeObj.getTime()
+            : timeObj.getHours() + timeObj.getMinutes() / 60, // Time as fraction of 24 hours
         y: severityScore,
         date: dateObj.toLocaleDateString("en-US", {
           day: "numeric",
           month: "short",
           year: "numeric",
         }),
-        time: dateObj.toLocaleTimeString("en-US", {
+        time: timeObj.toLocaleTimeString("en-US", {
           hour: "2-digit",
           minute: "2-digit",
           hour12: false,
@@ -58,7 +62,7 @@ export function Graphs({ cardData }: GraphsProps) {
   }, [cardData, activeView]);
 
   const total = React.useMemo(
-    () => cardData?.reduce((acc, curr) => acc + curr.score, 0),
+    () => cardData?.reduce((acc, curr) => acc + curr.severityScore, 0),
     [cardData]
   );
 
