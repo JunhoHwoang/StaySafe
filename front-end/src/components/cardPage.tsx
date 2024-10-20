@@ -2,38 +2,58 @@ import React from "react";
 import Header from "./header";
 import { useLocation } from "react-router-dom";
 import { Progress } from "./ui/progress";
+import Alert from "@mui/material/Alert";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 const CardPage = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get("id");
+  const datetime = queryParams.get("datetime");
   const title = queryParams.get("title");
   const description = queryParams.get("description");
   const content = queryParams.get("content");
   const score = queryParams.get("score");
 
   return (
-    <div className="flex flex-col w-full h-screen">
+    <div className="flex flex-col w-full h-screen bg-background text-foreground">
       <Header />
-      <div className="flex flex-col justify-center items-center h-full ">
-        <div className="flex flex-row justify-center items-center space-x-8">
-          <div className="flex flex-col text-center">
-            <p className="text-3xl">{title}</p>
-            <p className="text-2xl">{id}</p>
-          </div>
-          <div className="flex flex-col justify-center items-center">
-            <p className="text-2xl">{score}</p>
-            <Progress value={Number(score) || 0} className="w-64" />
-          </div>
-        </div>
-        <div className="flex flex-col items-start mt-6 text-start">
-          <p className="text-2xl">Description:</p>
-          <p className="text-xl">{description}</p>
-        </div>
-        <div className="flex flex-col items-start mt-6 text-start">
-          <p className="text-2xl">Solution:</p>
-          <p className="text-xl">{content}</p>
-        </div>
+      <div className="flex-1 container mx-auto px-4 py-8">
+        <Card className="w-full">
+          <CardHeader className="flex flex-row justify-between items-center">
+            <div>
+              <CardTitle className="text-3xl mb-2">{title}</CardTitle>
+              <p className="text-sm text-muted-foreground">ID: {id}</p>
+              <p className="text-sm text-muted-foreground">{datetime}</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <p className="text-2xl font-bold mb-2">Score: {score}</p>
+              <Progress value={Number(score) || 0} className="w-64" />
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Alert severity="info" variant="outlined">
+                <h3 className="text-xl font-semibold mb-2 text-foreground">
+                  Description:
+                </h3>
+                <p className="text-base text-foreground">{description}</p>
+              </Alert>
+              <Alert severity="info" variant="outlined">
+                <h3 className="text-xl font-semibold mb-2 text-foreground">
+                  More Info:
+                </h3>
+                <p className="text-base text-foreground">{description}</p>
+              </Alert>
+            </div>
+            <Alert severity="success" variant="outlined">
+              <h3 className="text-xl font-semibold mb-2 text-foreground">
+                Solution:
+              </h3>
+              <p className="text-base text-foreground">{content}</p>
+            </Alert>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

@@ -70,7 +70,7 @@ export const SafetyCardList: React.FC<CardListProps> = ({ cards }) => {
       {currentItems.map((card) => (
         <Link
           key={card.id}
-          to={`/card?id=${card.id}&title=${card.title}&description=${card.description}&content=${card.content}&score=${card.score}%datetime=${card.datetime}`}
+          to={`/card?id=${card.id}&title=${card.title}&description=${card.description}&content=${card.content}&score=${card.score}&datetime=${card.datetime}`}
           className="no-underline"
         >
           <CardItem {...card} />
