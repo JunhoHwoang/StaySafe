@@ -87,11 +87,6 @@ export function Graphs({ cardData }: GraphsProps) {
             <CardTitle>Severe Scores</CardTitle>
             <CardDescription>Distribution of scores over time</CardDescription>
           </div>
-          <div className="flex items-center justify-between">
-            <div className="text-md font-bold leading-none sm:text-xl">
-              Mean: {mean}
-            </div>
-          </div>
         </CardHeader>
         <CardContent className="p-4">
           <ResponsiveContainer width="100%" height={400}>
