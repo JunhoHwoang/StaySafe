@@ -36,8 +36,8 @@ public class SafetyService {
             "All incidents you evaluate are independent and should be treated as separate cases. " +
             "Format the suggestion to match the following properties: the id, the date, the time, an overview, description, severity score, category, hazards, prevention, solution, and lesson. " +
             "For the id, use the input that is provided for the id. " +
-            "For the date, use the input that is provided for the date. " +
-            "For the time, use the input that is provided for the time. " +
+            "For the date, provide ONLY the date portion of the input in the format of 'MM/DD/YYYY'. " +
+            "For the time, provide ONLY the time portion of the input in the format of 'HH:MM'. " +
             "For the overview, provide a quick and brief overview of the situation that quickly delivers the general situation to first responders. " +
             "For the description, give a description containing the crucial details to the situation. " +
             "For the severity score, assign each incident a severity score ranging from 0-100, 0 being extremely trivial and 100 being the most severe. This will cast to an int. " +
@@ -88,4 +88,8 @@ public class SafetyService {
         return report;
     }
 
+    public List<ReportEntity> getAllReports() {
+        //safetyRepository.findAll();
+        return safetyRepository.findAll();
+    }
 }
