@@ -4,6 +4,7 @@ import { Progress } from "./ui/progress";
 import Alert from "@mui/material/Alert";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import TypingAnimation from "./ui/typing-animation";
+import { FadeIn } from "./ui/FadeInComp";
 
 const CardPage = () => {
   const location = useLocation();
@@ -21,6 +22,7 @@ const CardPage = () => {
     <div className="flex flex-col w-full h-screen bg-background text-foreground">
       <Header />
       <div className="flex-1 container mx-auto px-4 py-8">
+        <FadeIn>
         <Card className="w-full">
           <CardHeader className="flex flex-col sm:flex-row justify-between items-center">
             <div>
@@ -69,7 +71,8 @@ const CardPage = () => {
               />
             </Alert>
           </CardContent>
-        </Card>
+          </Card>
+        </FadeIn>
       </div>
     </div>
   );
