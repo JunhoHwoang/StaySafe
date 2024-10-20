@@ -4,6 +4,7 @@ import { FilterSort } from "./FilterSort";
 import { Graphs } from "./Graphs";
 import { useState } from "react";
 import { GraphStats } from "./GraphStats";
+import getCardsData from "./service/getCardsData";
 
 // Sample data for the cards
 const cardData = [
@@ -58,8 +59,7 @@ const cardData = [
   },
 ];
 export default function MainPage() {
-
-    {}
+  const data = getCardsData();
   const [filteredItems, setFilteredItems] = useState(cardData);
 
   return (
