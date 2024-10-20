@@ -20,11 +20,11 @@ import { DatePicker } from "./DatePicker";
 import { ScoreFilter } from "./ScoreFilter";
 import { CategoryFilter } from "./CategoryFilter";
 
-export const FilterSort = ({ items = [], onFilterSort = {} }) => {
+export const FilterSort = ({ items = [], onFilterSort = {}}) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedScore, setSelectedScore] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [sortOrder, setSortOrder] = useState("high");
+  const [sortOrder, setSortOrder] = useState(null);
 
   // Handle date change from DatePicker
   const handleDateChange = (date) => {
@@ -60,23 +60,17 @@ export const FilterSort = ({ items = [], onFilterSort = {} }) => {
   // Function to filter and sort items
   const applyFilterSort = () => {
     let filteredItems = [...items];
-
+  
     // Apply filters
     if (selectedDate) {
       filteredItems = filteredItems.filter((item) => {
-        return (
-          new Date(item.date).toDateString() ===
-          new Date(selectedDate).toDateString()
-        );
+        return new Date(item.date).toDateString() === new Date(selectedDate).toDateString();
       });
     }
 
     if (selectedScore) {
       filteredItems = filteredItems.filter((item) => {
-        return (
-          item.severityScore >= selectedScore[0] &&
-          item.severityScore <= selectedScore[1]
-        );
+        return item.severityScore >= selectedScore[0] && item.severityScore <= selectedScore[1];
       });
     }
 
