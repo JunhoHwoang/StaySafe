@@ -27,7 +27,7 @@ export const FilterSort = ({ items = [], onFilterSort = {}}) => {
   const [sortOrder, setSortOrder] = useState(null);
 
   // Handle date change from DatePicker
-  const handleDateChange = (date) => {
+  const handleDateChange = (date = null) => {
     setSelectedDate(date);
     applyFilterSort();
   };

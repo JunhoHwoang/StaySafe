@@ -117,7 +117,7 @@ export function Graphs({ cardData }: GraphsProps) {
                   if (active && payload && payload.length) {
                     const data = payload[0].payload;
                     return (
-                      <div className="bg-white p-2 border rounded shadow">
+                      <div className="bg-background p-2 border rounded shadow">
                         <p>
                           {activeView === "date"
                             ? `Date: ${data.date}`

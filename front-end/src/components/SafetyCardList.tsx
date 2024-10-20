@@ -37,6 +37,7 @@ const CardItem: React.FC<CardData> = ({
   description,
   solution,
   severityScore,
+  category,
 }) => (
   <Card className="mb-4 transform transition-transform duration-200 hover:scale-105 hover:shadow-lg">
     <CardHeader className="p-4">
@@ -54,10 +55,13 @@ const CardItem: React.FC<CardData> = ({
           year: "numeric",
         })}
       </Badge>
-      <Badge>Score: {severityScore}</Badge>
+      <div className="flex items-center space-x-2">
+        <Badge variant="destructive">{category}</Badge>
+        <Badge>Score: {severityScore}</Badge>
+      </div>
     </CardFooter>
   </Card>
-);
+)
 
 // CardList component
 export const SafetyCardList: React.FC<CardListProps> = ({ cards }) => {
