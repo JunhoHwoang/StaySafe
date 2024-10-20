@@ -20,7 +20,7 @@ import { DatePicker } from "./DatePicker";
 import { ScoreFilter } from "./ScoreFilter";
 import { CategoryFilter } from "./CategoryFilter";
 
-export const FilterSort = ({ items = [], onFilterSort = () => {} }) => {
+export const FilterSort = ({ items = [], onFilterSort = {} }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedScore, setSelectedScore] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -60,19 +60,23 @@ export const FilterSort = ({ items = [], onFilterSort = () => {} }) => {
   // Function to filter and sort items
   const applyFilterSort = () => {
     let filteredItems = [...items];
-    console.log("Original Items:", items);
-    console.log("Current Filters - Date:", selectedDate, "Score:", selectedScore, "Category:", selectedCategory, "Sort Order:", sortOrder);
 
     // Apply filters
     if (selectedDate) {
       filteredItems = filteredItems.filter((item) => {
-        return new Date(item.datetime).toDateString() === new Date(selectedDate).toDateString();
+        return (
+          new Date(item.date).toDateString() ===
+          new Date(selectedDate).toDateString()
+        );
       });
     }
 
     if (selectedScore) {
       filteredItems = filteredItems.filter((item) => {
-        return item.score >= selectedScore[0] && item.score <= selectedScore[1];
+        return (
+          item.severityScore >= selectedScore[0] &&
+          item.severityScore <= selectedScore[1]
+        );
       });
     }
 
@@ -87,15 +91,15 @@ export const FilterSort = ({ items = [], onFilterSort = () => {} }) => {
       filteredItems = filteredItems.slice().sort((a, b) => {
         switch (sortOrder) {
           case "high":
-            return b.score - a.score; // Score High to Low
+            return b.severityScore - a.severityScore; // Score High to Low
           case "low":
-            return a.score - b.score; // Score Low to High
+            return a.severityScore - b.severityScore; // Score Low to High
           case "newest":
-            return new Date(b.datetime) - new Date(a.datetime); // Newest first
+            return new Date(b.date) - new Date(a.date); // Newest first
           case "oldest":
-            return new Date(a.datetime) - new Date(b.datetime); // Oldest first
+            return new Date(a.date) - new Date(b.date); // Oldest first
           case "lex":
-            return a.title.localeCompare(b.title); // A-Z by title
+            return a.overview.localeCompare(b.overview); // A-Z by title
           default:
             return 0;
         }

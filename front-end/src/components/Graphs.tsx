@@ -34,7 +34,7 @@ export function Graphs({ cardData }: GraphsProps) {
   const [activeView, setActiveView] = React.useState<"date" | "time">("date");
 
   const processedData = React.useMemo(() => {
-    return cardData.map(({ datetime, score }) => {
+    return cardData?.map(({ date, score }) => {
       const dateObj = new Date(datetime);
       return {
         x: activeView === "date" 
@@ -56,7 +56,7 @@ export function Graphs({ cardData }: GraphsProps) {
   }, [cardData, activeView]);
 
   const total = React.useMemo(
-    () => cardData.reduce((acc, curr) => acc + curr.score, 0),
+    () => cardData?.reduce((acc, curr) => acc + curr.score, 0),
     [cardData]
   );
 
