@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Dialog,
   DialogClose,
@@ -23,8 +23,12 @@ import { CategoryFilter } from "./CategoryFilter";
 export const FilterSort = ({ items = [], onFilterSort = {} }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedScore, setSelectedScore] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const [sortOrder, setSortOrder] = useState("high");
+  const categories = useMemo(() => 
+    Array.from(new Set(items.map(item => item.category))),
+    [items]
+  );
 
   // Handle date change from DatePicker
   const handleDateChange = (date = null) => {
@@ -55,7 +59,7 @@ export const FilterSort = ({ items = [], onFilterSort = {} }) => {
     if (sortOrder) {
       applyFilterSort();
     }
-  }, [sortOrder, selectedDate, selectedScore, selectedCategory]);
+  }, [sortOrder, selectedDate, selectedScore, selectedCategories]);
 
   // Function to filter and sort items
   const applyFilterSort = () => {
@@ -80,10 +84,10 @@ export const FilterSort = ({ items = [], onFilterSort = {} }) => {
       });
     }
 
-    if (selectedCategory) {
-      filteredItems = filteredItems.filter((item) => {
-        return item.category === selectedCategory;
-      });
+    if (selectedCategories.length > 0) {
+      filteredItems = filteredItems.filter((item) => 
+        selectedCategories.includes(item.category)
+      );
     }
 
     // Apply sorting with a fresh copy of the filtered items
@@ -124,8 +128,7 @@ export const FilterSort = ({ items = [], onFilterSort = {} }) => {
           <div className="space-y-4 py-4">
             <DatePicker onChange={handleDateChange} />
             <ScoreFilter onChange={handleScoreChange} />
-            <CategoryFilter onChange={handleCategoryChange} />
-          </div>
+            <CategoryFilter onChange={handleCategoryChange} categories={categories} selectedCategories={selectedCategories} />          </div>
           <DialogFooter className="sm:justify-start">
             <DialogClose asChild>
               <Button type="button" variant="secondary">
