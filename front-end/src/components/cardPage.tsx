@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { Progress } from "./ui/progress";
 import Alert from "@mui/material/Alert";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import TypingAnimation from "./ui/typing-animation";
 
 const CardPage = () => {
   const location = useLocation();
@@ -50,7 +51,11 @@ const CardPage = () => {
               <h3 className="text-xl font-semibold mb-2 text-foreground">
                 Solution:
               </h3>
-              <p className="text-base text-foreground">{content}</p>
+              <TypingAnimation
+                className="text-base text-foreground"
+                text={content}
+                duration={50}
+              />
             </Alert>
           </CardContent>
         </Card>
