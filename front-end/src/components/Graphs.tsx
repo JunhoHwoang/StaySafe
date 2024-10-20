@@ -59,7 +59,6 @@ export function Graphs({ cardData }: GraphsProps) {
     () => cardData.reduce((acc, curr) => acc + curr.score, 0),
     [cardData]
   );
-  const mean = (total / cardData.length).toFixed(2);
 
   return (
     <div>
@@ -86,11 +85,6 @@ export function Graphs({ cardData }: GraphsProps) {
           <div className="flex flex-1 flex-col justify-center gap-1">
             <CardTitle>Severe Scores</CardTitle>
             <CardDescription>Distribution of scores over time</CardDescription>
-          </div>
-          <div className="flex items-center justify-between">
-            <div className="text-md font-bold leading-none sm:text-xl">
-              Mean: {mean}
-            </div>
           </div>
         </CardHeader>
         <CardContent className="p-4">

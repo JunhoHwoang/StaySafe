@@ -1,4 +1,3 @@
-import React from "react";
 import Header from "./header";
 import { useLocation } from "react-router-dom";
 import { Progress } from "./ui/progress";
@@ -11,9 +10,9 @@ const CardPage = () => {
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get("id");
   const datetime = queryParams.get("datetime");
-  const title = queryParams.get("title");
+  const overview = queryParams.get("title");
   const description = queryParams.get("description");
-  const content = queryParams.get("content") || "";
+  const content = queryParams.get("overview");
   const score = queryParams.get("score");
 
   return (
@@ -23,7 +22,7 @@ const CardPage = () => {
         <Card className="w-full">
           <CardHeader className="flex flex-row justify-between items-center">
             <div>
-              <CardTitle className="text-3xl mb-2">{title}</CardTitle>
+              <CardTitle className="text-3xl mb-2">{overview}</CardTitle>
               <p className="text-sm text-muted-foreground">ID: {id}</p>
               <p className="text-sm text-muted-foreground">{datetime}</p>
             </div>

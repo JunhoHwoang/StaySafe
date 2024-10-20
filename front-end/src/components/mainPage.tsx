@@ -4,9 +4,11 @@ import { FilterSort } from "./FilterSort";
 import { Graphs } from "./Graphs";
 import { useState } from "react";
 import { GraphStats } from "./GraphStats";
+import getCardsData from "./service/getCardsData";
 
 // Sample data for the cards
 const cardData = [
+    
   {
     id: 1,
     datetime: "4/21/2024 6:00",
@@ -57,6 +59,7 @@ const cardData = [
   },
 ];
 export default function MainPage() {
+  const data = getCardsData();
   const [filteredItems, setFilteredItems] = useState(cardData);
 
   return (
