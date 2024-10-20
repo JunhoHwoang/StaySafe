@@ -36,23 +36,21 @@ export function Graphs({ cardData }: GraphsProps) {
 
   const processedData = React.useMemo(() => {
     return cardData?.map(({ date, time, severityScore }) => {
-      const dateObj = new Date(date);
-      const timeObj = new Date(time);
+      const dateObj = new Date(date + " " + time);
       console.log(dateObj);
-      console.log(timeObj);
 
       return {
         x:
           activeView === "date"
-            ? timeObj.getTime()
-            : timeObj.getHours() + timeObj.getMinutes() / 60, // Time as fraction of 24 hours
+            ? dateObj.getTime()
+            : dateObj.getHours() + dateObj.getMinutes() / 60, // Time as fraction of 24 hours
         y: severityScore,
         date: dateObj.toLocaleDateString("en-US", {
           day: "numeric",
           month: "short",
           year: "numeric",
         }),
-        time: timeObj.toLocaleTimeString("en-US", {
+        time: dateObj.toLocaleTimeString("en-US", {
           hour: "2-digit",
           minute: "2-digit",
           hour12: false,

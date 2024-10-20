@@ -10,10 +10,12 @@ const CardPage = () => {
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get("id");
   const datetime = queryParams.get("datetime");
-  const overview = queryParams.get("title");
+  const overview = queryParams.get("overview");
   const description = queryParams.get("description");
-  const content = queryParams.get("overview");
-  const score = queryParams.get("score");
+  const solution = queryParams.get("solution");
+  const lesson = queryParams.get("lesson");
+  const prevention = queryParams.get("prevention");
+  const severityScore = queryParams.get("severityScore");
 
   return (
     <div className="flex flex-col w-full h-screen bg-background text-foreground">
@@ -27,9 +29,9 @@ const CardPage = () => {
               <p className="text-sm text-muted-foreground">{datetime}</p>
             </div>
             <div className="flex flex-col items-center mt-4 sm:mt-0">
-              <p className="text-2xl font-bold mb-2">Score: {score}</p>
+              <p className="text-2xl font-bold mb-2">Score: {severityScore}</p>
               <Progress
-                value={Number(score) || 0}
+                value={Number(severityScore) || 0}
                 className="w-full sm:w-64 max-w-[16rem]"
               />
             </div>
@@ -46,7 +48,14 @@ const CardPage = () => {
                 <h3 className="text-xl font-semibold mb-2 text-foreground">
                   Lessons and Preventions:
                 </h3>
-                <p className="text-base text-foreground">{description}</p>
+                <ul className="list-disc">
+                  <li className="text-base text-foreground">
+                    {lesson}
+                  </li>
+                  <li className="text-base text-foreground">
+                    {prevention}
+                  </li>
+                </ul>
               </Alert>
             </div>
             <Alert severity="success" variant="outlined">
@@ -55,7 +64,7 @@ const CardPage = () => {
               </h3>
               <TypingAnimation
                 className="text-base text-foreground"
-                text={content}
+                text={solution}
                 duration={20}
               />
             </Alert>
