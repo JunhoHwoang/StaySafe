@@ -16,15 +16,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { DatePicker } from "./DatePicker";
 import { ScoreFilter } from "./ScoreFilter";
 import { CategoryFilter } from "./CategoryFilter";
 
-export const FilterSort = ({ items = [], onFilterSort = {}}) => {
+export const FilterSort = ({ items = [], onFilterSort = {} }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedScore, setSelectedScore] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [sortOrder, setSortOrder] = useState(null);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [sortOrder, setSortOrder] = useState("high");
+  const categories = useMemo(
+    () => Array.from(new Set(items.map((item) => item.category))),
+    [items]
+  );
 
   // Handle date change from DatePicker
   const handleDateChange = (date = null) => {
@@ -40,7 +43,7 @@ export const FilterSort = ({ items = [], onFilterSort = {}}) => {
 
   // Handle category change from CategoryFilter
   const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
+    setSelectedCategories(category);
     applyFilterSort();
   };
 
@@ -60,22 +63,28 @@ export const FilterSort = ({ items = [], onFilterSort = {}}) => {
   // Function to filter and sort items
   const applyFilterSort = () => {
     let filteredItems = [...items];
-  
+
     // Apply filters
     if (selectedDate) {
       filteredItems = filteredItems.filter((item) => {
-        return new Date(item.date).toDateString() === new Date(selectedDate).toDateString();
+        return (
+          new Date(item.date).toDateString() ===
+          new Date(selectedDate).toDateString()
+        );
       });
     }
 
     if (selectedScore) {
       filteredItems = filteredItems.filter((item) => {
-        return item.severityScore >= selectedScore[0] && item.severityScore <= selectedScore[1];
+        return (
+          item.severityScore >= selectedScore[0] &&
+          item.severityScore <= selectedScore[1]
+        );
       });
     }
 
     if (selectedCategories.length > 0) {
-      filteredItems = filteredItems.filter((item) => 
+      filteredItems = filteredItems.filter((item) =>
         selectedCategories.includes(item.category)
       );
     }
@@ -116,9 +125,13 @@ export const FilterSort = ({ items = [], onFilterSort = {}}) => {
             <DialogTitle>Filter</DialogTitle>
           </DialogHeader>
           <div className="space-y-4 py-4">
-            <DatePicker onChange={handleDateChange} />
             <ScoreFilter onChange={handleScoreChange} />
-            <CategoryFilter onChange={handleCategoryChange} categories={categories} selectedCategories={selectedCategories} />          </div>
+            <CategoryFilter
+              onChange={handleCategoryChange}
+              categories={categories}
+              selectedCategories={selectedCategories}
+            />{" "}
+          </div>
           <DialogFooter className="sm:justify-start">
             <DialogClose asChild>
               <Button type="button" variant="secondary">
