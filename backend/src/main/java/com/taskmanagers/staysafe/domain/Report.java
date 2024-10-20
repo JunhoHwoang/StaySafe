@@ -3,6 +3,9 @@ package com.taskmanagers.staysafe.domain;
 import java.util.List;
 
 public record Report(
+        int id,
+        String date,
+        String time,
         String overview,
         String description,
         int severityScore,
