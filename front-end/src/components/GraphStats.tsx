@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { FadeIn } from "./ui/FadeInComp";
 
 interface GraphStatsProps {
   cardData: {
@@ -43,6 +44,8 @@ export function GraphStats({ cardData }: GraphStatsProps) {
         const avg =
           last7Days?.reduce((sum, c) => sum + c.severityScore, 0) /
           last7Days?.length;
+          last7Days?.reduce((sum, c) => sum + c.severityScore, 0) /
+          last7Days?.length;
         return { date: new Date(card.date), average: avg };
       }) || [];
 
@@ -59,57 +62,64 @@ export function GraphStats({ cardData }: GraphStatsProps) {
 
   return (
     <div className="flex flex-col gap-4">
-      <Card className="w-full min-h-fit">
-        <CardHeader>
-          <CardTitle>Safety Statistics</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <div>
-              <h3 className="text-lg font-semibold">Mean Severity</h3>
-              <p>{stats.mean}</p>
+      <FadeIn>
+        <Card className="w-full min-h-fit">
+          <CardHeader>
+            <CardTitle>Safety Statistics</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              <div>
+                <h3 className="text-lg font-semibold">Mean Severity</h3>
+                <p>{stats.mean}</p>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold">Max Severity</h3>
+                <p>{stats.max}</p>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold">Min Severity</h3>
+                <p>{stats.min}</p>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold">Median Severity</h3>
+                <p>{stats.median}</p>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold">Standard Deviation</h3>
+                <p>{stats.stdDev}</p>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold">
+                  High-Severity Incidents
+                </h3>
+                <p>{stats.highSeverityCount}</p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold">Max Severity</h3>
-              <p>{stats.max}</p>
+            <div className="mt-4">
+              <h3 className="text-lg font-semibold">
+                7-Day Moving Average Trend
+              </h3>
+              <p>
+                Last value:{" "}
+                {stats.movingAverage?.length > 0
+                  ? stats.movingAverage[
+                      stats.movingAverage.length - 1
+                    ]?.average.toFixed(2)
+                  : "No data available"}
+              </p>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold">Min Severity</h3>
-              <p>{stats.min}</p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold">Median Severity</h3>
-              <p>{stats.median}</p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold">Standard Deviation</h3>
-              <p>{stats.stdDev}</p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold">High-Severity Incidents</h3>
-              <p>{stats.highSeverityCount}</p>
-            </div>
-          </div>
-          <div className="mt-4">
-            <h3 className="text-lg font-semibold">
-              7-Day Moving Average Trend
-            </h3>
-            <p>
-              Last value:{" "}
-              {stats.movingAverage?.length > 0
-                ? stats.movingAverage[
-                    stats.movingAverage.length - 1
-                  ]?.average.toFixed(2)
-                : "No data available"}
-            </p>
-          </div>
-        </CardContent>
-      </Card>
-      <Card className="w-full min-h-fit">
-        <CardHeader>
-          <CardTitle>Safety Statistics Summary</CardTitle>
-        </CardHeader>
-      </Card>
+          </CardContent>
+        </Card>
+      </FadeIn>
+      <FadeIn>
+        <Card className="w-full min-h-fit">
+          <CardHeader>
+            <CardTitle>Safety Statistics Summary</CardTitle>
+          </CardHeader>
+          <CardContent>TODO AI insights</CardContent>
+        </Card>
+      </FadeIn>
     </div>
   );
 }
