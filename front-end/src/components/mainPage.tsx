@@ -7,6 +7,7 @@ import { GraphStats } from "./GraphStats";
 
 // Sample data for the cards
 const cardData = [
+    
   {
     id: 1,
     datetime: "4/21/2024 6:00",
@@ -57,6 +58,8 @@ const cardData = [
   },
 ];
 export default function MainPage() {
+
+    {}
   const [filteredItems, setFilteredItems] = useState(cardData);
 
   return (

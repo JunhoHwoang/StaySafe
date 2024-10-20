@@ -59,7 +59,6 @@ export function Graphs({ cardData }: GraphsProps) {
     () => cardData.reduce((acc, curr) => acc + curr.score, 0),
     [cardData]
   );
-  const mean = (total / cardData.length).toFixed(2);
 
   return (
     <div>
