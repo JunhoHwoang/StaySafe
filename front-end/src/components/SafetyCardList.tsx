@@ -37,6 +37,7 @@ const CardItem: React.FC<CardData> = ({
   description,
   solution,
   severityScore,
+  category,
 }) => (
   <Card className="mb-4 transform transition-transform duration-200 hover:scale-105 hover:shadow-lg">
     <CardHeader className="p-4">
@@ -54,6 +55,7 @@ const CardItem: React.FC<CardData> = ({
           year: "numeric",
         })}
       </Badge>
+      <Badge variant="secondary">{category}</Badge>
       <Badge>Score: {severityScore}</Badge>
     </CardFooter>
   </Card>
