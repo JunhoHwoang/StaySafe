@@ -32,7 +32,10 @@ public class SafetyService {
             "12. ARC_FLASH: Any incident that involves arc flashes. " +
             "13. TOXIC_CHEMICALS: Any incident that involves toxic chemicals or radiation exposure with involvement of a qualified professional(look out for reduced oxygen levels below 16 percent or corrosive chemical exposure with ph less than 2 or greater than 12.5. " +
             "All incidents you evaluate are independent and should be treated as separate cases. " +
-            "Format the suggestion to match the following properties: an overview, description, severity score, category, hazards, prevention, solution, and lesson. " +
+            "Format the suggestion to match the following properties: the id, the date, the time, an overview, description, severity score, category, hazards, prevention, solution, and lesson. " +
+            "For the id, use the input that is provided for the id. " +
+            "For the date, use the input that is provided for the date. " +
+            "For the time, use the input that is provided for the time. " +
             "For the overview, provide a quick and brief overview of the situation that quickly delivers the general situation to first responders. " +
             "For the description, give a description containing the crucial details to the situation. " +
             "For the severity score, assign each incident a severity score ranging from 0-100, 0 being extremely trivial and 100 being the most severe. This will cast to an int. " +
@@ -43,6 +46,7 @@ public class SafetyService {
             "For lesson, give some examples of lessons that can be learned from this situation that will better prepare people in the future for similar situations. ";
 
     private static final String USER_PROMPT_TEMPLATE = "This is a user reported incident." +
+            "Id of occurrence: %d. " +
             "Date of occurrence: %s. " +
             "Safety criteria being assessed: %s. " +
             "List of observations: %s. " +
