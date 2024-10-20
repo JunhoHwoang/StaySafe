@@ -4,62 +4,11 @@ import { FilterSort } from "./FilterSort";
 import { Graphs } from "./Graphs";
 import { useState } from "react";
 import { GraphStats } from "./GraphStats";
-import getCardsData from "./service/getCardsData";
+import useCardData from "./useCardData";
 
-// Sample data for the cards
-const cardData = [
-    
-  {
-    id: 1,
-    datetime: "4/21/2024 6:00",
-    title: "Card 1",
-    description: "This is the first card",
-    content: "Content for card 1",
-    score: 10,
-  },
-  {
-    id: 2,
-    datetime: "4/12/2024 14:00",
-    title: "Card 2",
-    description: "This is the second card",
-    content: "Content for card 2",
-    score: 8,
-  },
-  {
-    id: 3,
-    datetime: "9/10/2022 24:00",
-    title: "Card 3",
-    description: "This is the third card",
-    content: "Content for card 3",
-    score: 6,
-  },
-  {
-    id: 4,
-    datetime: "2/20/2024 23:00",
-    title: "Card 4",
-    description: "This is the third card",
-    content: "Content for card 4",
-    score: 2,
-  },
-  {
-    id: 5,
-    datetime: "4/20/2022",
-    title: "Card 5",
-    description: "This is the third card",
-    content: "Content for card 5",
-    score: 5,
-  },
-  {
-    id: 7,
-    datetime: "4/20/2024",
-    title: "Card 6",
-    description: "This is the third card",
-    content: "Content for card 6",
-    score: 6,
-  },
-];
+
 export default function MainPage() {
-  const data = getCardsData();
+  const cardData = useCardData();
   const [filteredItems, setFilteredItems] = useState(cardData);
 
   return (
