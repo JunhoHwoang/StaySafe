@@ -20,15 +20,18 @@ const CardPage = () => {
       <Header />
       <div className="flex-1 container mx-auto px-4 py-8">
         <Card className="w-full">
-          <CardHeader className="flex flex-row justify-between items-center">
+          <CardHeader className="flex flex-col sm:flex-row justify-between items-center">
             <div>
               <CardTitle className="text-3xl mb-2">{overview}</CardTitle>
               <p className="text-sm text-muted-foreground">ID: {id}</p>
               <p className="text-sm text-muted-foreground">{datetime}</p>
             </div>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center mt-4 sm:mt-0">
               <p className="text-2xl font-bold mb-2">Score: {score}</p>
-              <Progress value={Number(score) || 0} className="w-64" />
+              <Progress
+                value={Number(score) || 0}
+                className="w-full sm:w-64 max-w-[16rem]"
+              />
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -41,7 +44,7 @@ const CardPage = () => {
               </Alert>
               <Alert severity="info" variant="outlined">
                 <h3 className="text-xl font-semibold mb-2 text-foreground">
-                  More Info:
+                  Lessons and Preventions:
                 </h3>
                 <p className="text-base text-foreground">{description}</p>
               </Alert>
@@ -53,7 +56,7 @@ const CardPage = () => {
               <TypingAnimation
                 className="text-base text-foreground"
                 text={content}
-                duration={50}
+                duration={20}
               />
             </Alert>
           </CardContent>
