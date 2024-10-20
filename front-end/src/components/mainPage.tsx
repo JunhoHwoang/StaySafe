@@ -25,7 +25,7 @@ const cardData = [
   },
   {
     id: 3,
-    datetime: "9/10/202 24:00",
+    datetime: "9/10/2022 24:00",
     title: "Card 3",
     description: "This is the third card",
     content: "Content for card 3",
@@ -56,7 +56,6 @@ const cardData = [
     score: 6,
   },
 ];
-
 export default function MainPage() {
   const [filteredItems, setFilteredItems] = useState(cardData);
 
@@ -64,12 +63,12 @@ export default function MainPage() {
     <div className="flex flex-col w-full min-h-screen">
       <Header />
       <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-6 p-6">
-        <div className="md:col-span-2 order-first md:order-last space-y-4">
-          <h2 className="text-2xl font-semibold">Graphs</h2>
+        <div className="md:col-span-2 order-last md:order-first space-y-4">
+          <h2 className="text-2xl font-semibold">Statistics</h2>
           <Graphs cardData={cardData} />
           <GraphStats cardData={cardData} />
         </div>
-        <div className="md:col-span-2 order-last md:order-first space-y-4">
+        <div className="md:col-span-2 order-first md:order-last space-y-4">
           <h2 className="text-2xl font-semibold">Results</h2>
           <FilterSort items={cardData} onFilterSort={setFilteredItems} />
           <SafetyCardList cards={filteredItems} />
