@@ -40,7 +40,18 @@ public class SafetyService {
             "For the time, provide ONLY the time portion of the input in the format of 'HH:MM'. " +
             "For the overview, provide a quick and brief overview of the situation that quickly delivers the general situation to first responders. " +
             "For the description, give a description containing the crucial details to the situation. " +
-            "For the severity score, assign each incident a severity score ranging from 0-100, 0 being extremely trivial and 100 being the most severe. This will cast to an int. " +
+            "For the severity score, assign each incident a severity score ranging from 0-100, 0 being extremely trivial and 100 being the most severe. This will cast to an int. If a score is between 2 thresholds, assign it between them based on which one it is related too more. " +
+            "An example of a severity score of 0 is an uneventful, insignificant, incidence where no injuries occurred, mostly focusing on reminders. " +
+            "An example of a severity score of 10 is an event involving situations where no injuries occurred and the situation had low risks involved. " +
+            "An example of a severity score of 20 is an event involving situations where minor injuries could have occurred but there none were sustained. " +
+            "An example of a severity score of 30 is an event involving situations where minor injuries have occurred or additional consulting and resources are needed such as a professional or specialized equipment. " +
+            "An example of a severity score of 40 is an event involving situations where a urgent response is needed that involves swift action from individuals. " +
+            "A minimum severity score of 50 is assigned to an event involving situations where only one of the 13 hazards listed before is present. " +
+            "An example of a severity score of 60 is an event involving uncontrolled and unsecure dangerous events. " +
+            "An example of a severity score of 70 is an event involving uncontrolled and unsecure dangerous events that may involve major injuries. " +
+            "A minimum severity score of 80 is assigned to an event involving situations where two of the 13 hazards listed before is present. " +
+            "An example of a severity score of 90 is an event involving events that are must be resolved as soon as possible with large teams, with potential fatalities. " +
+            "A severity score of 100 is assigned to an event involving situations where three or more of the 13 hazards listed before is present. " +
             "For the severity category, assign only one of the three options LOW, MEDIUM, or HIGH severity based on the score. " +
             "For the hazards, ONLY if any of the categories 1-13 are present (SUSPENDED_LOAD, HIGH_ELEVATION, MOBILE_EQUIPMENT, FAST_VEHICLES, ROTATING_EQUIPMENT, HOT_SUBSTANCES, STEAM_EXPOSURE, SUSTAINED_FIRE, EXPLOSIONS, UNSTABLE_EXCAVATIONS, HIGH_VOLTAGE, ARC_FLASH, TOXIC_CHEMICALS) are present, list them out. This will be parsed into an array. " +
             "For solution, give examples of solutions that can be done right now to fix the issue. " +
