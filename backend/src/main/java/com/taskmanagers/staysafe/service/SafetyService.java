@@ -1,9 +1,11 @@
 package com.taskmanagers.staysafe.service;
 
 import com.opencsv.bean.CsvToBeanBuilder;
+import com.taskmanagers.staysafe.Repository.SafetyRepository;
 import com.taskmanagers.staysafe.StaysafeApplication;
 import com.taskmanagers.staysafe.domain.Incident;
 import com.taskmanagers.staysafe.domain.Report;
+import com.taskmanagers.staysafe.domain.ReportEntity;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;
 
@@ -54,12 +56,14 @@ public class SafetyService {
             "Recommended solution: %s. ";
 
     private final ChatClient chatClient;
+    private final SafetyRepository safetyRepository;
 
-    public SafetyService(ChatClient chatClient) {
+    public SafetyService(ChatClient chatClient, SafetyRepository safetyRepository) {
         this.chatClient = chatClient;
+        this.safetyRepository = safetyRepository;
     }
 
-    public Report evaluate() {
+    public ReportEntity evaluate() {
         ClassLoader classLoader = StaysafeApplication.class.getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream("data/incidents.csv");
         InputStreamReader reader = new InputStreamReader(Objects.requireNonNull(inputStream));
@@ -68,18 +72,20 @@ public class SafetyService {
                 .withType(Incident.class)
                 .build()
                 .parse();
-
+        int id = incidents.get(0).getId();
         String date = incidents.get(0).getDate();
         String criteria = incidents.get(0).getCriteria();
         String observations = incidents.get(0).getObservations();
         String risks = incidents.get(0).getRisks();
         String solution = incidents.get(0).getSolution();
 
-        return chatClient.prompt()
+        ReportEntity report = chatClient.prompt()
                 .system(SYSTEM_PROMPT)
-                .user(String.format(USER_PROMPT_TEMPLATE, date, criteria, observations, risks, solution))
+                .user(String.format(USER_PROMPT_TEMPLATE, id, date, criteria, observations, risks, solution))
                 .call()
-                .entity(Report.class);
+                .entity(ReportEntity.class);
+        safetyRepository.save(report);
+        return report;
     }
 
 }

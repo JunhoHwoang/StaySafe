@@ -2,6 +2,7 @@ package com.taskmanagers.staysafe.controller;
 
 import com.taskmanagers.staysafe.domain.Incident;
 import com.taskmanagers.staysafe.domain.Report;
+import com.taskmanagers.staysafe.domain.ReportEntity;
 import com.taskmanagers.staysafe.service.SafetyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +24,8 @@ public class SafetyController {
     }
 
     @PostMapping
-    public ResponseEntity<Report> getReports() {
-        Report report = safetyService.evaluate();
+    public ResponseEntity<ReportEntity> getReports() {
+        ReportEntity report = safetyService.evaluate();
         return new ResponseEntity<>(report, HttpStatus.OK);
     }
 }
