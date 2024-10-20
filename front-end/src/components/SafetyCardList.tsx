@@ -57,7 +57,7 @@ const CardItem: React.FC<CardData> = ({
         })}
       </Badge>
       <div className="flex items-center space-x-2">
-        <Badge variant="destructive">{category}</Badge>
+        <Badge variant={category === "LOW" ? "low" : category === "MEDIUM" ? "medium" : "HIGH"}>{category}</Badge>
         <Badge>Score: {severityScore}</Badge>
       </div>
     </CardFooter>
