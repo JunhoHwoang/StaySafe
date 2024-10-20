@@ -15,6 +15,7 @@ import Pagination from "./Pagination";
 interface CardData {
   id: number;
   date: string;
+  time: string;
   overview: string;
   description: string;
   category: string;
@@ -61,7 +62,7 @@ const CardItem: React.FC<CardData> = ({
       </div>
     </CardFooter>
   </Card>
-)
+);
 
 // CardList component
 export const SafetyCardList: React.FC<CardListProps> = ({ cards }) => {
@@ -78,7 +79,13 @@ export const SafetyCardList: React.FC<CardListProps> = ({ cards }) => {
       {currentItems?.map((card) => (
         <Link
           key={card.id}
-          to={`/card?id=${card.id}&overview=${card.overview}&description=${card.description}&solution=${card.solution}&severityScore=${card.severityScore}&datetime=${card.date + card.time}`}
+          to={`/card?id=${card.id}&overview=${card.overview}&description=${
+            card.description
+          }&solution=${card.solution}&severityScore=${
+            card.severityScore
+          }&datetime=${card.date + " " + card.time}&lesson=${
+            card.lesson
+          }&prevention=${card.prevention}`}
           className="no-underline"
         >
           <CardItem {...card} />
@@ -89,7 +96,6 @@ export const SafetyCardList: React.FC<CardListProps> = ({ cards }) => {
         itemsPerPage={itemsPerPage}
         currentPage={currentPage}
         onPageChange={setCurrentPage}
-        
       />
     </div>
   );
