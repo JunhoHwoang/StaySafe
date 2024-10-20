@@ -44,10 +44,9 @@ const CardItem: React.FC<CardData> = ({
   <Card className="mb-4 transform transition-transform duration-200 hover:scale-105 hover:shadow-lg">
     <CardHeader className="p-4">
       <CardTitle>{overview}</CardTitle>
-      <CardDescription>{description}</CardDescription>
     </CardHeader>
     <CardContent className="p-4">
-      <p>{solution}</p>
+      <p className="text-muted-foreground">{description}</p>
     </CardContent>
     <CardFooter className="p-4 flex justify-between items-center">
       <Badge variant="outline" className="mr-2">
@@ -96,7 +95,7 @@ export const SafetyCardList: React.FC<CardListProps> = ({ cards }) => {
               card.severityScore
             }&datetime=${card.date + " " + card.time}&lesson=${
               card.lesson
-            }&prevention=${card.prevention}`}
+            }&prevention=${card.prevention} &category=${card.category}`}
             className="no-underline"
           >
             <CardItem {...card} />
