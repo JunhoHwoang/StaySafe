@@ -22,11 +22,12 @@ import {
 interface GraphsProps {
   cardData: {
     id: number;
-    datetime: string;
-    title: string;
+    date: string;
+    time: string;
+    overview: string;
     description: string;
     content: string;
-    score: number;
+    severityScore: number;
   }[];
 }
 
@@ -34,13 +35,14 @@ export function Graphs({ cardData }: GraphsProps) {
   const [activeView, setActiveView] = React.useState<"date" | "time">("date");
 
   const processedData = React.useMemo(() => {
-    return cardData?.map(({ date, score }) => {
-      const dateObj = new Date(datetime);
+    return cardData?.map(({ date, time, severityScore }) => {
+      const dateObj = new Date(date + time);
       return {
-        x: activeView === "date" 
-          ? dateObj.getTime() 
-          : dateObj.getHours() + dateObj.getMinutes() / 60, // Time as fraction of 24 hours
-        y: score,
+        x:
+          activeView === "date"
+            ? dateObj.getTime()
+            : dateObj.getHours() + dateObj.getMinutes() / 60, // Time as fraction of 24 hours
+        y: severityScore,
         date: dateObj.toLocaleDateString("en-US", {
           day: "numeric",
           month: "short",
@@ -89,23 +91,20 @@ export function Graphs({ cardData }: GraphsProps) {
         </CardHeader>
         <CardContent className="p-4">
           <ResponsiveContainer width="100%" height={400}>
-            <ScatterChart
-              margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-            >
+            <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
               <CartesianGrid />
               <XAxis
                 type="number"
                 dataKey="x"
                 name={activeView === "date" ? "date" : "time"}
                 domain={
-                  activeView === "date"
-                    ? ["auto", "auto"]
-                    : [0, 24] // 0 to 24 hours for time view
+                  activeView === "date" ? ["auto", "auto"] : [0, 24] // 0 to 24 hours for time view
                 }
-                tickFormatter={(value) =>
-                  activeView === "date"
-                    ? new Date(value).toLocaleDateString()
-                    : `${String(Math.floor(value)).padStart(2, "0")}:00` // Format hour:minute
+                tickFormatter={
+                  (value) =>
+                    activeView === "date"
+                      ? new Date(value).toLocaleDateString()
+                      : `${String(Math.floor(value)).padStart(2, "0")}:00` // Format hour:minute
                 }
                 ticks={activeView === "time" ? [0, 6, 12, 18, 24] : undefined}
               />
