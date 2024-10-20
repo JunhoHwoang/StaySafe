@@ -3,6 +3,7 @@ import { SafetyCardList } from "./SafetyCardList";
 import { FilterSort } from "./FilterSort";
 import { Graphs } from "./Graphs";
 import { useState } from "react";
+import { GraphStats } from "./GraphStats";
 
 // Sample data for the cards
 const cardData = [
@@ -66,6 +67,7 @@ export default function MainPage() {
         <div className="md:col-span-2 order-first md:order-last space-y-4">
           <h2 className="text-2xl font-semibold">Graphs</h2>
           <Graphs cardData={cardData} />
+          <GraphStats cardData={cardData} />
         </div>
         <div className="md:col-span-2 order-last md:order-first space-y-4">
           <h2 className="text-2xl font-semibold">Results</h2>

@@ -81,6 +81,7 @@ export const SafetyCardList: React.FC<CardListProps> = ({ cards }) => {
         itemsPerPage={itemsPerPage}
         currentPage={currentPage}
         onPageChange={setCurrentPage}
+        
       />
     </div>
   );
