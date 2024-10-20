@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <div className="w-full p-4 flex items-center justify-between border-b">
       <Link to="/">
-        <p className="text-3xl">SafeVolt⚡</p>
+        <p className="text-3xl ml-2">SafeVolt⚡</p>
       </Link>
       <button onClick={toggleDarkMode}>
         <Sun
