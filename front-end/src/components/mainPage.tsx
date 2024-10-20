@@ -1,12 +1,15 @@
 import Header from "./header";
 import { SafetyCardList } from "./SafetyCardList";
-import { Sidebar } from "./sidebar";
+import { FilterSort } from "./FilterSort";
 import { Graphs } from "./Graphs";
+import { useState } from "react";
+import { GraphStats } from "./GraphStats";
 
 // Sample data for the cards
 const cardData = [
   {
     id: 1,
+    datetime: "4/21/2024 6:00",
     title: "Card 1",
     description: "This is the first card",
     content: "Content for card 1",
@@ -14,6 +17,7 @@ const cardData = [
   },
   {
     id: 2,
+    datetime: "4/12/2024 14:00",
     title: "Card 2",
     description: "This is the second card",
     content: "Content for card 2",
@@ -21,6 +25,7 @@ const cardData = [
   },
   {
     id: 3,
+    datetime: "9/10/202 24:00",
     title: "Card 3",
     description: "This is the third card",
     content: "Content for card 3",
@@ -28,6 +33,7 @@ const cardData = [
   },
   {
     id: 4,
+    datetime: "2/20/2024 23:00",
     title: "Card 4",
     description: "This is the third card",
     content: "Content for card 4",
@@ -35,6 +41,7 @@ const cardData = [
   },
   {
     id: 5,
+    datetime: "4/20/2022",
     title: "Card 5",
     description: "This is the third card",
     content: "Content for card 5",
@@ -42,6 +49,7 @@ const cardData = [
   },
   {
     id: 7,
+    datetime: "4/20/2024",
     title: "Card 6",
     description: "This is the third card",
     content: "Content for card 6",
@@ -50,18 +58,21 @@ const cardData = [
 ];
 
 export default function MainPage() {
+  const [filteredItems, setFilteredItems] = useState(cardData);
+
   return (
-    <div className="flex flex-col w-full h-screen items-stretch">
+    <div className="flex flex-col w-full min-h-screen">
       <Header />
-      <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-1 h-full ml-5">
-        <div className="md:col-span-2 order-first md:order-last m-4">
-          <p className="text-2xl">Graphs</p>
-          <Graphs />
+      <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-6 p-6">
+        <div className="md:col-span-2 order-first md:order-last space-y-4">
+          <h2 className="text-2xl font-semibold">Graphs</h2>
+          <Graphs cardData={cardData} />
+          <GraphStats cardData={cardData} />
         </div>
-        <div className="md:col-span-2 order-last md:order-first m-4">
-          <p className="text-2xl">Results</p>
-          <Sidebar />
-          <SafetyCardList cards={cardData} />
+        <div className="md:col-span-2 order-last md:order-first space-y-4">
+          <h2 className="text-2xl font-semibold">Results</h2>
+          <FilterSort items={cardData} onFilterSort={setFilteredItems} />
+          <SafetyCardList cards={filteredItems} />
         </div>
       </div>
     </div>
