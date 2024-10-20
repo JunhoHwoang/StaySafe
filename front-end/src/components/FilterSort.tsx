@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogClose,
@@ -8,7 +8,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
 import { Button } from "./ui/button";
 import {
   Select,
@@ -22,10 +21,10 @@ import { ScoreFilter } from "./ScoreFilter";
 import { CategoryFilter } from "./CategoryFilter";
 
 export const FilterSort = ({ items, onFilterSort }) => {
-  const [selectedDate, setSelectedDate] = useState(false);
-  const [selectedScore, setSelectedScore] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(false);
-  const [sortOrder, setSortOrder] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedScore, setSelectedScore] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [sortOrder, setSortOrder] = useState("high");
 
   // Handle date change from DatePicker
   const handleDateChange = (date) => {
@@ -47,37 +46,38 @@ export const FilterSort = ({ items, onFilterSort }) => {
 
   // Handle sort change
   const handleSortChange = (value) => {
+    console.log("Sort value selected:", value);
     setSortOrder(value);
-    applyFilterSort();
   };
 
-  // Function to filter and sort items
+  // Use useEffect to trigger sorting whenever sortOrder changes
+  useEffect(() => {
+    if (sortOrder) {
+      applyFilterSort();
+    }
+  }, [sortOrder, selectedDate, selectedScore, selectedCategory]);
+
   // Function to filter and sort items
   const applyFilterSort = () => {
-    // Create a new copy of the items to avoid mutating the original array
     let filteredItems = [...items];
+    console.log("Original Items:", items);
+    console.log("Current Filters - Date:", selectedDate, "Score:", selectedScore, "Category:", selectedCategory, "Sort Order:", sortOrder);
 
     // Apply filters
     if (selectedDate) {
       filteredItems = filteredItems.filter((item) => {
-        // Assuming each item has a datetime field
-        return (
-          new Date(item.datetime).toDateString() ===
-          new Date(selectedDate).toDateString()
-        );
+        return new Date(item.datetime).toDateString() === new Date(selectedDate).toDateString();
       });
     }
 
     if (selectedScore) {
       filteredItems = filteredItems.filter((item) => {
-        // Assuming each item has a score field and selectedScore is a range (e.g., [min, max])
         return item.score >= selectedScore[0] && item.score <= selectedScore[1];
       });
     }
 
     if (selectedCategory) {
       filteredItems = filteredItems.filter((item) => {
-        // Assuming each item has a category field
         return item.category === selectedCategory;
       });
     }
@@ -86,13 +86,13 @@ export const FilterSort = ({ items, onFilterSort }) => {
     if (sortOrder) {
       filteredItems = filteredItems.slice().sort((a, b) => {
         switch (sortOrder) {
-          case "low":
-            return b.score - a.score; // Score High to Low
           case "high":
+            return b.score - a.score; // Score High to Low
+          case "low":
             return a.score - b.score; // Score Low to High
-          case "oldest":
-            return new Date(b.datetime) - new Date(a.datetime); // Newest first
           case "newest":
+            return new Date(b.datetime) - new Date(a.datetime); // Newest first
+          case "oldest":
             return new Date(a.datetime) - new Date(b.datetime); // Oldest first
           case "lex":
             return a.title.localeCompare(b.title); // A-Z by title
@@ -102,6 +102,7 @@ export const FilterSort = ({ items, onFilterSort }) => {
       });
     }
 
+    console.log("Filtered and Sorted Items:", filteredItems);
     // Call the callback function with the filtered and sorted items
     onFilterSort(filteredItems);
   };
