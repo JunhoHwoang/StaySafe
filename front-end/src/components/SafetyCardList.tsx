@@ -58,7 +58,7 @@ const CardItem: React.FC<CardData> = ({
 // CardList component
 export const SafetyCardList: React.FC<CardListProps> = ({ cards }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 2;
+  const itemsPerPage = 1;
 
   // Calculate the current items to display
   const indexOfLastItem = currentPage * itemsPerPage;

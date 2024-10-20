@@ -1,7 +1,8 @@
-import React from 'react';
-import { Button } from '@/components/ui/button'; // Import Button from Shadcn components
-import { cn } from '@/lib/utils'; // Utility function for class merging if needed
-import { PaginationEllipsis } from './ui/pagination';
+import React from "react";
+import { Button } from "@/components/ui/button"; // Import Button from Shadcn components
+import { cn } from "@/lib/utils"; // Utility function for class merging if needed
+import { PaginationEllipsis } from "./ui/pagination";
+import { useTheme } from "@/ThemeContext";
 
 interface PaginationProps {
   totalItems: number;
@@ -32,15 +33,17 @@ const Pagination: React.FC<PaginationProps> = ({
     currentPage + 1 < totalPages ? currentPage + 1 : null,
   ].filter((page): page is number => page !== null);
 
+  const { darkMode, toggleDarkMode } = useTheme();
+
   return (
     <div className="flex justify-center items-center space-x-2 mt-4">
       {/* Previous Button */}
       <Button
-        className="bg-gray-200"
+        className={darkMode ? 'bg-secondary text-gray-200': 'bg-gray-200 text-black'}
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
-        {'<'}
+        {"<"}
       </Button>
 
       {/* Always show the first page button */}
@@ -49,8 +52,10 @@ const Pagination: React.FC<PaginationProps> = ({
           <Button
             onClick={() => handlePageChange(1)}
             className={cn(
-              'bg-gray-200',
-              currentPage === 1 && 'bg-primary text-white'
+              darkMode
+                ? "bg-secondary text-gray-200"
+                : "bg-gray-200 text-black",
+              currentPage === 1 && "bg-primary text-white"
             )}
           >
             1
@@ -66,8 +71,9 @@ const Pagination: React.FC<PaginationProps> = ({
           key={page}
           onClick={() => handlePageChange(page)}
           className={cn(
-            'bg-gray-200',
-            page === currentPage && 'bg-primary text-white'
+            darkMode ? "bg-secondary text-gray-200" : "bg-gray-200 text-black",
+            page === currentPage &&
+              (darkMode ? "bg-gray-200 text-black" : "bg-primary text-white")
           )}
         >
           {page}
@@ -75,15 +81,19 @@ const Pagination: React.FC<PaginationProps> = ({
       ))}
 
       {/* Always show the last page button */}
-      {currentPage < totalPages  && (
+      {currentPage < totalPages && (
         <>
           {/* Ellipsis before the last page if needed */}
-          {currentPage < totalPages - 2 && <PaginationEllipsis className="text-gray-500"/>}
+          {currentPage < totalPages - 2 && (
+            <PaginationEllipsis className={darkMode ? "" : "text-gray-300"} />
+          )}
           <Button
             onClick={() => handlePageChange(totalPages)}
             className={cn(
-              'bg-gray-200',
-              currentPage === totalPages && 'bg-primary text-white'
+              darkMode
+                ? "bg-secondary text-gray-200"
+                : "bg-gray-200 text-black",
+              currentPage === totalPages && "bg-primary text-white"
             )}
           >
             {totalPages}
@@ -93,11 +103,11 @@ const Pagination: React.FC<PaginationProps> = ({
 
       {/* Next Button */}
       <Button
-        className="bg-gray-200"
+        className={darkMode ? 'bg-secondary text-gray-200': 'bg-gray-200 text-black'}
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
-        {'>'}
+        {">"}
       </Button>
     </div>
   );
