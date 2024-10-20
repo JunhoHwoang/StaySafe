@@ -2,14 +2,19 @@ import Header from "./header";
 import { SafetyCardList } from "./SafetyCardList";
 import { FilterSort } from "./FilterSort";
 import { Graphs } from "./Graphs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GraphStats } from "./GraphStats";
 import useCardData from "./useCardData";
 
-
 export default function MainPage() {
-  const cardData = useCardData();
-  const [filteredItems, setFilteredItems] = useState(cardData);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const cardData = useCardData() || []; // Ensure cardData is always an array
+  const [filteredItems, setFilteredItems] = useState([]);
+
+  // Update filteredItems whenever cardData changes
+  useEffect(() => {
+    setFilteredItems(cardData);
+  }, [cardData]);
 
   return (
     <div className="flex flex-col w-full min-h-screen">
@@ -22,7 +27,7 @@ export default function MainPage() {
         </div>
         <div className="md:col-span-2 order-first md:order-last space-y-4">
           <h2 className="text-2xl font-semibold">Results</h2>
-          <FilterSort items={cardData} onFilterSort={setFilteredItems} />
+          <FilterSort items={filteredItems} onFilterSort={setFilteredItems} />
           <SafetyCardList cards={filteredItems} />
         </div>
       </div>
