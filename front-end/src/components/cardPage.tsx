@@ -13,7 +13,7 @@ const CardPage = () => {
   const datetime = queryParams.get("datetime");
   const title = queryParams.get("title");
   const description = queryParams.get("description");
-  const content = queryParams.get("content");
+  const content = queryParams.get("content") || "";
   const score = queryParams.get("score");
 
   return (

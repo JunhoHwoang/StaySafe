@@ -20,14 +20,14 @@ import { DatePicker } from "./DatePicker";
 import { ScoreFilter } from "./ScoreFilter";
 import { CategoryFilter } from "./CategoryFilter";
 
-export const FilterSort = ({ items, onFilterSort }) => {
+export const FilterSort = ({ items = [], onFilterSort = () => {} }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedScore, setSelectedScore] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [sortOrder, setSortOrder] = useState("high");
 
   // Handle date change from DatePicker
-  const handleDateChange = (date) => {
+  const handleDateChange = (date = null) => {
     setSelectedDate(date);
     applyFilterSort();
   };
