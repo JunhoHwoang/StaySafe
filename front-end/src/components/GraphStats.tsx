@@ -41,7 +41,8 @@ export function GraphStats({ cardData }: GraphStatsProps) {
       cardData?.map((card, index) => {
         const last7Days = cardData?.slice(Math.max(0, index - 6), index + 1);
         const avg =
-          last7Days?.reduce((sum, c) => sum + c.severityScore, 0) / last7Days?.length;
+          last7Days?.reduce((sum, c) => sum + c.severityScore, 0) /
+          last7Days?.length;
         return { date: new Date(card.date), average: avg };
       }) || [];
 
@@ -108,7 +109,6 @@ export function GraphStats({ cardData }: GraphStatsProps) {
         <CardHeader>
           <CardTitle>Safety Statistics Summary</CardTitle>
         </CardHeader>
-        <CardContent>TODO AI insights</CardContent>
       </Card>
     </div>
   );
